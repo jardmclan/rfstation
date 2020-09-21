@@ -1,0 +1,10 @@
+{
+    "name":"ing1",
+    "value": {
+        "dataset": "new",
+        "version": "v1.0",
+        "type": "",
+        "datatype": "rainfall"
+    }
+
+}

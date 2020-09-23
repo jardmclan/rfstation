@@ -1,63 +1,22 @@
 import csv
 import json
 from concurrent.futures import ThreadPoolExecutor
-import os
-import subprocess
-import re
-import random
-from time import sleep
-from multiprocessing import Lock, Semaphore
-
-
-
-def ingestion_handler(data, bash_file, meta_file, cleanup, retry, delay = 0):
-    if retry < 0:
-        raise Exception("Retry limit exceeded")
-
-    def retry_failure_with_backoff():
-        backoff = 0
-        #if first failure backoff of 0.25-0.5 seconds
-        if delay == 0:
-            backoff = 0.25 + random.uniform(0, 0.25)
-        #otherwise 2-3x current backoff
-        else:
-            backoff = delay * 2 + random.uniform(0, delay)
-        #retry with one less retry remaining and current backoff
-        return ingestion_handler(data, bash_file, meta_file, cleanup, retry - 1, backoff)
-
-    sleep(delay)
-
-    uuid = None
-    with open(meta_file, "w") as f:
-        json.dump(data, f)
-    try:
-        out = subprocess.check_output(["sh", bash_file])
-    except CalledProcessError:
-        uuid = retry_failure_with_backoff()
-    #if success output should be "Successfully submitted metadata object <uuid>"
-    match = re.fullmatch(r"Successfully submitted metadata object (.+)", out)
-    if match is not None:
-        uuid = match.group(1)
-    else:
-        uuid = retry_failure_with_backoff()
-    if cleanup:
-        os.remove(meta_file)
-    return uuid
+from multiprocessing import Lock, Semaphore, cpu_count
+from ingestion_handler import ingestion_handler
     
 
 def main():
     
-    basedata_f = "basedata.json"
+    basedata_f = "basedata_meta.json"
     basedata = None
     with open(basedata_f, "r") as f:
         basedata = json.load(f)
 
-    basedata["value"]["type"] = "station_metadata"
-
     trans = {
         "SKN": "skn",
         "Station.Name": "name",
-        "OBSERVER,Network": "network",
+        "OBSERVER": "observer",
+        "Network": "network",
         "Island": "island",
         "ELEV.m.": "elevation_m",
         "LAT": "lat",
@@ -70,9 +29,9 @@ def main():
     }
 
     failure_lock = Lock()
-    throttle = Semaphore(10)
+    throttle = Semaphore(100)
 
-    #reset failures log
+    #create/reset failures log
     with open("failures.log", "w") as failure_log:
         failure_log.write("")
 
@@ -81,23 +40,24 @@ def main():
     with open(meta_file, "r") as fd:
         reader = csv.reader(fd)
         header = None
-        #threads>
-        with ThreadPoolExecutor(3) as t_exec:
+        threads = cpu_count()
+        with ThreadPoolExecutor(threads) as t_exec:
             row_num = 0
             complete = 0
             for row in reader:
-                throttle.acquire()
                 if header is None:
                     header = row
                 else:
+                    throttle.acquire()
                     skn = row[skn_index]
-                    data = basedata
-                    for i in len(header):
+                    data = dict(basedata)
+                    for i in range(len(header)):
                         header_field = header[i]
                         field_name = trans[header_field]
                         value = row[i]
                         data["value"][field_name] = value
-                    f = t_exec.submit(ingestion_handler, data)
+                    doc_file_name = "./output/meta_%d.json" % row_num
+                    f = t_exec.submit(ingestion_handler, data, "./bin/add_meta.sh", doc_file_name, True, 5)
                     #wrapper since skn will change due to python's wonderful scoping
                     def cb(skn):
                         def _cb(f):
@@ -115,6 +75,7 @@ def main():
                             throttle.release()
                         return _cb
                     f.add_done_callback(cb(skn))
+                row_num += 1
         print("Complete!")
 
 

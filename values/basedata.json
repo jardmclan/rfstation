@@ -1,0 +1,13 @@
+{
+    "name":"test",
+    "value": {
+        "version": "v1.0",
+        "type": "station_vals",
+        "datatype": "rainfall",
+        "period": "daily",
+        "unit": "mm",
+        "coverage": "1990-p",
+        "dataset": "new"
+    }
+
+}

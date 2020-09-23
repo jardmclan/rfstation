@@ -1,9 +1,8 @@
 {
-    "name":"ing1",
+    "name":"ing3",
     "value": {
-        "dataset": "new",
         "version": "v1.0",
-        "type": "",
+        "type": "station_metadata",
         "datatype": "rainfall"
     }
 

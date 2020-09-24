@@ -5,29 +5,40 @@ import re
 import json
 from copy import deepcopy
 from ingestion_handler import ingestion_handler
-from sys import stderr
+from sys import stderr, argv
+from os.path import join
 
-date_format = re.compile("X([0-9]{4}).([0-9]{2}).([0-9]{2})")
 
-basedata_f = "basedata_meta.json"
+config_file = "./config.json"
+config = None
+if len(argv) > 1:
+    config_file = argv[1]
+with open(config_file, "r") as f:
+    config = json.load(f)
+
+basedata_f = config["basedata"]
+data_file = config["data_file"]
+bash_file = config["bash_file"]
+failure_file = config["failure_file"]
+processes = config["processes"]
+threads = config["threads"]
+cleanup = config["cleanup"]
+retry = config["retry"]
+outdir = config["output_dir"]
+date_format = config["date_format"]
+date_format = re.compile(date_format)
+
 basedata = None
 with open(basedata_f, "r") as f:
     basedata = json.load(f)
 
-data_file = "site_vals.csv"
-bash_file = "../bin/add_meta.sh"
-failure_file = "./failures.log"
-processes = 2
-threads = 2
-cleanup = True
-retry = 5
+
 
 
 
 def handle_row(row, header, failure_lock):
     skn = row[0]
     with ThreadPoolExecutor(threads) as t_exec:
-        complete = 0
         for i in range(1, len(row)):
             date = header[i]
             value = row[i]
@@ -35,24 +46,23 @@ def handle_row(row, header, failure_lock):
             data["value"]["skn"] = skn
             data["value"]["date"] = date
             data["value"]["value"] = value
-            meta_file = "doc_%d.json" % i
+            meta_file = "%s_doc_%d.json" % (skn, i)
+            meta_file = join(outdir, meta_file)
             f = t_exec.submit(ingestion_handler, data, bash_file, meta_file, cleanup, retry)
             def cb(date):
                 def _cb(f):
-                    nonlocal complete
+                    #print(f.result())
                     e = f.exception()
                     if e is not None:
+                        print(e, file = stderr)
                         #log failure
                         #cbs may be called from other thread, so lock file to be safe
                         with failure_lock:
                             with open(failure_file, "a") as failure_log:
                                 failure_log.write("%s,%s\n" % (skn, date))
-                    complete += 1
-                    if complete % 100 == 0:
-                        print("Completed %d docs" % complete)
-                    throttle.release()
                 return _cb
-            f.add_done_callback(cb(skn))
+            f.add_done_callback(cb(date))
+    print("Completed skn %s" % skn)
 
 
 
@@ -95,15 +105,13 @@ def main():
                 else:
                     throttle.acquire()
                     f = p_exec.submit(handle_row, row, header, failure_lock)
-                    def cb(skn):
-                        def _cb(f):
-                            e = f.exception()
-                            if e is None:
-                                print(e, file = stderr)
-                            throttle.release()
-                            print("Completed skn %s" % skn)
-                        return _cb
-                    f.add_done_callback(cb(row[0]))
+                    def cb(f):
+                        e = f.exception()
+                        if e is not None:
+                            print(e, file = stderr)
+                        throttle.release()
+                    f.add_done_callback(cb)
+    print("Complete!")
 
                     
 

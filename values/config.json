@@ -1,0 +1,12 @@
+{
+    "data_file": "site_vals.csv",
+    "bash_file": "../bin/add_meta.sh",
+    "failure_file": "./failures.log",
+    "output_dir": "./output/",
+    "processes": 2,
+    "threads": 2,
+    "cleanup": true,
+    "retry": 5,
+    "basedata": "basedata.json",
+    "date_format": "X([0-9]{4}).([0-9]{2}).([0-9]{2})"
+}

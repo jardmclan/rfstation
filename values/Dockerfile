@@ -21,4 +21,6 @@ ENV PATH /usr/local/agave-cli/bin:$PATH
 RUN mkdir /root/.agave
 COPY ./current_store/current /root/.agave/current
 
+RUN cd /app
+
 ENTRYPOINT ["python", "driver.py"]

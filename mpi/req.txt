@@ -1,0 +1,3 @@
+pip install geotiff
+pip install numpy
+pip install imagecodecs

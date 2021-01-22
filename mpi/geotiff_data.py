@@ -52,8 +52,6 @@ class RasterData:
             #assume data[0][0] is nodata
             nodata = data[0][0]
 
-            #let's add in 0 removal, create template of indices in header
-
             data_map = {}
             for yi in range(nRows):
                 for xi in range(nCols):
@@ -67,8 +65,8 @@ class RasterData:
             self.data = data_map
 
 
-r = RasterData("1990_01_statewide_rf_mm.tif")
-print(r.data)
+# r = RasterData("1990_01_statewide_rf_mm.tif")
+# print(r.data)
 
         
     

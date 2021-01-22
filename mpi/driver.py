@@ -7,7 +7,7 @@ from copy import deepcopy
 from ingestion_handler import ingestion_handler
 from sys import stderr, argv
 from os.path import join
-
+from geotiff_data import GeotiffData
 
 
 
@@ -33,6 +33,10 @@ rank = comm.Get_rank()
 processor_name = MPI.Get_processor_name()
 
 ##########################################
+
+#everything needs version, so make global
+#unique version number for the data set, should change with each run
+version = config["version"]
 
 #remember $date IS necessary
 
@@ -65,6 +69,12 @@ def parse_date(date, period):
     return parsed_date
 
 
+def handle_geotiff(file, include_header):
+    data = GeotiffData(file)
+    if include_header:
+        pass
+
+
 
 
 #csv data should pass out metadata objects directly
@@ -72,12 +82,29 @@ def parse_date(date, period):
 
 #should separate station metadata and 
 
+#note fill type SHOULD be a standard field, if just raw data it would just be unfilled
+
 def distribute():
+
+    ranks = comm.Get_size() - 1
+
+    def send_info(info):
+        recv_rank = -1
+        #get next request for data (continue until receive request or all ranks error out and send -1)
+        while recv_rank == -1 and ranks > 0:
+            #receive data requests from ranks
+            recv_rank = comm.recv()
+            #if recv -1 one of the ranks errored out, subtract from processor ranks (won't be requesting any more data)
+            if recv_rank == -1:
+                ranks -= 1
+            #otherwise send data chunk to the rank that requested data
+            else:
+                comm.send(info, dest = recv_rank)
+
 
     ###################################################
 
-    #unique version number for the data set, should change with each run
-    version = config["version"]
+    
 
     raster_file_data = config["raster_file_data"]
     station_file_data = config["station_file_data"]
@@ -93,13 +120,80 @@ def distribute():
     }
     
 
+    ###########################################################################
+
     for raster_file_data_item in raster_file_data:
-        raster_file_classification = raster_file_data_item["classification"]
-        raster_file_subclassification = raster_file_data_item["subclassification"]
-        raster_file_units = raster_file_data_item["units"]
-        #note this should go in the header doc, serves as a string tag for the spatial extent (should always be statewide, but leave just in case, if this changes a new header is required)
-        raster_spatial_extent = raster_file_data_item["extent"]
+        header_complete = False
+        #for document format the main body should only have properties that are garenteed between data sets, everything else should be in the data portion
+        #not everything might have fill type
+        raster_classification = raster_file_data_item["classification"]
+        raster_subclassification = raster_file_data_item["subclassification"]
+        raster_period = raster_file_data_item["period"]
+        raster_units = raster_file_data_item["units"]
+        #include header id in case want extend to multiple headers later (change in resolution, spatial extent, etc), can use something like "hawaii_statewide_default" or something like that
+        raster_header_id = raster_file_data_item["header_id"]
         include_header = raster_file_data_item["include_header"]
+
+        raster_file_info = raster_file_data_item["raster_file_info"]
+        for raster_file_info_item in raster_file_info:
+            raster_file = raster_file_info_item["raster_file"]
+            #this is the only thing that should change on a per file basis
+            raster_date = raster_file_info_item["raster_date"]
+            #any additional information unique to this set of rasters (non-standard fields), just set to null if there are none
+            raster_ext = raster_file_info_item["ext_data"]
+
+
+                
+
+            header_complete = True
+
+            #distribute info with file, type, and field data
+            info = {
+                "type": "raster",
+                "version": version,
+                "data": {
+                    "header_id": raster_header_id,
+                    "classification": raster_classification,
+                    "subclassification": raster_subclassification,
+                    "units": raster_units,
+                    "period": raster_period,
+                    "date": raster_date,
+                    "ext" : raster_ext,
+                    "include_header": include_header and not header_complete
+                },
+                "file": raster_file
+            }
+            
+            send_info(info)
+
+            #######
+            
+            raster_header_doc = {
+                "name": doc_names["raster_header"],
+                "version": version,
+                "value": {
+                    "id": raster_header_id
+                    "data": None
+                }
+            }
+
+            raster_doc = {
+                "name": doc_names["raster"],
+                "version": version,
+                "value": {
+                    "header_id": raster_header_id,
+                    "classification": raster_classification,
+                    "subclassification": raster_subclassification,
+                    "units": raster_units,
+                    "period": raster_period,
+                    "date": {
+                        "$date": raster_date
+                    },
+                    "ext" : raster_ext,
+                    "data": None
+                }
+            }
+
 
 
 
@@ -108,22 +202,70 @@ def distribute():
     ###################################################
 
 
+    for station_file_data_item in station_file_data:
+        station_classification = station_file_data_item["classification"]
+        station_subclassification = station_file_data_item["subclassification"]
+        
+        station_units = station_file_data_item["units"]
+
+        #process metadata as a separate file, can just recycle one of the files if multiple
+        #this way if the group has variable sets of stations it handles they can be stripped out and put into a separate file to avoid issues (or can just feed it one of the files if theyre all the same)
+        #if no metadata just set this to null
+        metadata_info = station_file_data_item["metadata_info"]
+        #handle metadata item first
+        #make metadata classification agnostic, there might be overlap between stations between classifications, all the metadata is pulled in beforehand so shouldn't matter (can change this if need, but should be fine, value docs have classification and subclass if available)
+        #might want to add something to check if station skn already exists? worry about this later
+        if metadata_info is not None:
+            metadata_file = metadata_info["file"]
+            metadata_cols = metadata_info["metadata_cols"]
+            metadata_field_name_translation = metadata_info["field_name_translations"]
+            #all info should be in the columns themselves, but allow extension data just in case
+            metadata_ext = metadata_info["ext_data"]
+
+            #have each classification, subclass have their own set of metadata, when this changes in the application it should pull the new set
+            #potentially some duplication, but more extensible and less difficult to track, also should limit items stored by application to some extent
+            #NOTE should actually make the subclass for this stuff 'new', then if decide to pull in station data for the legacy stuff later add in an additional set with the legacy stations
+            #this will likely have a lot of duplication but don't worry about that (the metadata duplication should have minimal storage impact anyway)
+            #can also use this to indicate no associated station data implicitly since returns no data rather than having it indicated by dataset in application
+            #so application can assume always have both, and if there's no rainfall stations then it just won't have anything to display, same result with lower complexity
+
+            info = {
+                "type": "station_metadata",
+                "data": {
+                    "metadata_cols": metadata_cols,
+                    "field_name_translations": metadata_field_name_translation,
+                    "ext": metadata_ext
+                },
+                "file": metadata_file
+            }
+
+        station_file_info = station_file_data_item["station_file_info"]
+        for station_file_info_item in station_file_info:
+
+            station_skn_col = station_file_info_item["skn_col"]
+            data_cols = station_file_info_item["data_cols"]
+
+            station_fill = station_file_info_item["fill"]
+            station_period = station_file_info_item["period"]
+
+            info = {
+                "type": "station_metadata",
+                "data": {
+                    "metadata_cols": metadata_cols,
+                    "field_name_translations": metadata_field_name_translation,
+                    "ext": metadata_ext
+                },
+                "file": metadata_file
+            }
 
 
-    ranks = comm.Get_size() - 1
 
-    def send_doc(doc):
-        recv_rank = -1
-        #get next request for data (continue until receive request or all ranks error out and send -1)
-        while recv_rank == -1 and ranks > 0:
-            #receive data requests from ranks
-            recv_rank = comm.recv()
-            #if recv -1 one of the ranks errored out, subtract from processor ranks (won't be requesting any more data)
-            if recv_rank == -1:
-                ranks -= 1
-            #otherwise send data chunk to the rank that requested data
-            else:
-                comm.send(doc, dest = recv_rank)
+
+
+    ##################################################################
+
+
+    
 
     #migrate to config
     trans = {

@@ -95,7 +95,8 @@ def send_doc(doc):
     doc_num += 1
     meta_file = join(outdir, meta_file)
     
-    ingestion_handler(doc, bash_file, meta_file, cleanup, retry)
+    uuid = ingestion_handler(doc, bash_file, meta_file, cleanup, retry)
+    print("Complete UUID: %s" % uuid)
 
 
 def handle_station_metadata(file, data):
@@ -310,6 +311,7 @@ def distribute():
     ranks = comm.Get_size() - 1
 
     def send_info(info):
+        nonlocal ranks
         recv_rank = -1
         #get next request for data (continue until receive request or all ranks error out and send -1)
         while recv_rank == -1 and ranks > 0:

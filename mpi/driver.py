@@ -385,6 +385,8 @@ def distribute():
                 "file": raster_file
             }
             
+            print(raster_file)
+
             send_info(info)
 
     ###################################################

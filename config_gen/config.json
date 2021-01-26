@@ -1,0 +1,1827 @@
+{
+    "version": "2.0",
+    "doc_names": {
+        "raster_header": "hcdp_raster_header",
+        "raster": "hcdp_raster",
+        "station_value": "hcdp_station_value",
+        "active_range": "hcdp_station_active_range",
+        "station_metadata": "hcdp_station_metadata"
+    },
+    "bash_file": "/home/mcleanj/rfing/bin/add_meta.sh",
+    "outdir": "/home/mcleanj/rfing/out",
+    "cleanup": true,
+    "retry": 5,
+    "raster_file_data": [
+        {
+            "classification": "rainfall",
+            "subclassification": "new",
+            "period": "month",
+            "units": "mm",
+            "header_id": "hawaii_statewide_250m",
+            "include_header": true,
+            "raster_file_info": [
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_01/1990_01_statewide_rf_mm.tif",
+                    "raster_date": "1990-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_02/1990_02_statewide_rf_mm.tif",
+                    "raster_date": "1990-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_03/1990_03_statewide_rf_mm.tif",
+                    "raster_date": "1990-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_04/1990_04_statewide_rf_mm.tif",
+                    "raster_date": "1990-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_05/1990_05_statewide_rf_mm.tif",
+                    "raster_date": "1990-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_06/1990_06_statewide_rf_mm.tif",
+                    "raster_date": "1990-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_07/1990_07_statewide_rf_mm.tif",
+                    "raster_date": "1990-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_08/1990_08_statewide_rf_mm.tif",
+                    "raster_date": "1990-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_09/1990_09_statewide_rf_mm.tif",
+                    "raster_date": "1990-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_10/1990_10_statewide_rf_mm.tif",
+                    "raster_date": "1990-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_11/1990_11_statewide_rf_mm.tif",
+                    "raster_date": "1990-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1990_12/1990_12_statewide_rf_mm.tif",
+                    "raster_date": "1990-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_01/1991_01_statewide_rf_mm.tif",
+                    "raster_date": "1991-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_02/1991_02_statewide_rf_mm.tif",
+                    "raster_date": "1991-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_03/1991_03_statewide_rf_mm.tif",
+                    "raster_date": "1991-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_04/1991_04_statewide_rf_mm.tif",
+                    "raster_date": "1991-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_05/1991_05_statewide_rf_mm.tif",
+                    "raster_date": "1991-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_06/1991_06_statewide_rf_mm.tif",
+                    "raster_date": "1991-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_07/1991_07_statewide_rf_mm.tif",
+                    "raster_date": "1991-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_08/1991_08_statewide_rf_mm.tif",
+                    "raster_date": "1991-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_09/1991_09_statewide_rf_mm.tif",
+                    "raster_date": "1991-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_10/1991_10_statewide_rf_mm.tif",
+                    "raster_date": "1991-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_11/1991_11_statewide_rf_mm.tif",
+                    "raster_date": "1991-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1991_12/1991_12_statewide_rf_mm.tif",
+                    "raster_date": "1991-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_01/1992_01_statewide_rf_mm.tif",
+                    "raster_date": "1992-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_02/1992_02_statewide_rf_mm.tif",
+                    "raster_date": "1992-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_03/1992_03_statewide_rf_mm.tif",
+                    "raster_date": "1992-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_04/1992_04_statewide_rf_mm.tif",
+                    "raster_date": "1992-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_05/1992_05_statewide_rf_mm.tif",
+                    "raster_date": "1992-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_06/1992_06_statewide_rf_mm.tif",
+                    "raster_date": "1992-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_07/1992_07_statewide_rf_mm.tif",
+                    "raster_date": "1992-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_08/1992_08_statewide_rf_mm.tif",
+                    "raster_date": "1992-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_09/1992_09_statewide_rf_mm.tif",
+                    "raster_date": "1992-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_10/1992_10_statewide_rf_mm.tif",
+                    "raster_date": "1992-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_11/1992_11_statewide_rf_mm.tif",
+                    "raster_date": "1992-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1992_12/1992_12_statewide_rf_mm.tif",
+                    "raster_date": "1992-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_01/1993_01_statewide_rf_mm.tif",
+                    "raster_date": "1993-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_02/1993_02_statewide_rf_mm.tif",
+                    "raster_date": "1993-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_03/1993_03_statewide_rf_mm.tif",
+                    "raster_date": "1993-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_04/1993_04_statewide_rf_mm.tif",
+                    "raster_date": "1993-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_05/1993_05_statewide_rf_mm.tif",
+                    "raster_date": "1993-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_06/1993_06_statewide_rf_mm.tif",
+                    "raster_date": "1993-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_07/1993_07_statewide_rf_mm.tif",
+                    "raster_date": "1993-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_08/1993_08_statewide_rf_mm.tif",
+                    "raster_date": "1993-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_09/1993_09_statewide_rf_mm.tif",
+                    "raster_date": "1993-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_10/1993_10_statewide_rf_mm.tif",
+                    "raster_date": "1993-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_11/1993_11_statewide_rf_mm.tif",
+                    "raster_date": "1993-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1993_12/1993_12_statewide_rf_mm.tif",
+                    "raster_date": "1993-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_01/1994_01_statewide_rf_mm.tif",
+                    "raster_date": "1994-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_02/1994_02_statewide_rf_mm.tif",
+                    "raster_date": "1994-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_03/1994_03_statewide_rf_mm.tif",
+                    "raster_date": "1994-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_04/1994_04_statewide_rf_mm.tif",
+                    "raster_date": "1994-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_05/1994_05_statewide_rf_mm.tif",
+                    "raster_date": "1994-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_06/1994_06_statewide_rf_mm.tif",
+                    "raster_date": "1994-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_07/1994_07_statewide_rf_mm.tif",
+                    "raster_date": "1994-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_08/1994_08_statewide_rf_mm.tif",
+                    "raster_date": "1994-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_09/1994_09_statewide_rf_mm.tif",
+                    "raster_date": "1994-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_10/1994_10_statewide_rf_mm.tif",
+                    "raster_date": "1994-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_11/1994_11_statewide_rf_mm.tif",
+                    "raster_date": "1994-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1994_12/1994_12_statewide_rf_mm.tif",
+                    "raster_date": "1994-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_01/1995_01_statewide_rf_mm.tif",
+                    "raster_date": "1995-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_02/1995_02_statewide_rf_mm.tif",
+                    "raster_date": "1995-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_03/1995_03_statewide_rf_mm.tif",
+                    "raster_date": "1995-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_04/1995_04_statewide_rf_mm.tif",
+                    "raster_date": "1995-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_05/1995_05_statewide_rf_mm.tif",
+                    "raster_date": "1995-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_06/1995_06_statewide_rf_mm.tif",
+                    "raster_date": "1995-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_07/1995_07_statewide_rf_mm.tif",
+                    "raster_date": "1995-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_08/1995_08_statewide_rf_mm.tif",
+                    "raster_date": "1995-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_09/1995_09_statewide_rf_mm.tif",
+                    "raster_date": "1995-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_10/1995_10_statewide_rf_mm.tif",
+                    "raster_date": "1995-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_11/1995_11_statewide_rf_mm.tif",
+                    "raster_date": "1995-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1995_12/1995_12_statewide_rf_mm.tif",
+                    "raster_date": "1995-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_01/1996_01_statewide_rf_mm.tif",
+                    "raster_date": "1996-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_02/1996_02_statewide_rf_mm.tif",
+                    "raster_date": "1996-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_03/1996_03_statewide_rf_mm.tif",
+                    "raster_date": "1996-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_04/1996_04_statewide_rf_mm.tif",
+                    "raster_date": "1996-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_05/1996_05_statewide_rf_mm.tif",
+                    "raster_date": "1996-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_06/1996_06_statewide_rf_mm.tif",
+                    "raster_date": "1996-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_07/1996_07_statewide_rf_mm.tif",
+                    "raster_date": "1996-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_08/1996_08_statewide_rf_mm.tif",
+                    "raster_date": "1996-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_09/1996_09_statewide_rf_mm.tif",
+                    "raster_date": "1996-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_10/1996_10_statewide_rf_mm.tif",
+                    "raster_date": "1996-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_11/1996_11_statewide_rf_mm.tif",
+                    "raster_date": "1996-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1996_12/1996_12_statewide_rf_mm.tif",
+                    "raster_date": "1996-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_01/1997_01_statewide_rf_mm.tif",
+                    "raster_date": "1997-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_02/1997_02_statewide_rf_mm.tif",
+                    "raster_date": "1997-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_03/1997_03_statewide_rf_mm.tif",
+                    "raster_date": "1997-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_04/1997_04_statewide_rf_mm.tif",
+                    "raster_date": "1997-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_05/1997_05_statewide_rf_mm.tif",
+                    "raster_date": "1997-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_06/1997_06_statewide_rf_mm.tif",
+                    "raster_date": "1997-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_07/1997_07_statewide_rf_mm.tif",
+                    "raster_date": "1997-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_08/1997_08_statewide_rf_mm.tif",
+                    "raster_date": "1997-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_09/1997_09_statewide_rf_mm.tif",
+                    "raster_date": "1997-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_10/1997_10_statewide_rf_mm.tif",
+                    "raster_date": "1997-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_11/1997_11_statewide_rf_mm.tif",
+                    "raster_date": "1997-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1997_12/1997_12_statewide_rf_mm.tif",
+                    "raster_date": "1997-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_01/1998_01_statewide_rf_mm.tif",
+                    "raster_date": "1998-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_02/1998_02_statewide_rf_mm.tif",
+                    "raster_date": "1998-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_03/1998_03_statewide_rf_mm.tif",
+                    "raster_date": "1998-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_04/1998_04_statewide_rf_mm.tif",
+                    "raster_date": "1998-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_05/1998_05_statewide_rf_mm.tif",
+                    "raster_date": "1998-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_06/1998_06_statewide_rf_mm.tif",
+                    "raster_date": "1998-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_07/1998_07_statewide_rf_mm.tif",
+                    "raster_date": "1998-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_08/1998_08_statewide_rf_mm.tif",
+                    "raster_date": "1998-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_09/1998_09_statewide_rf_mm.tif",
+                    "raster_date": "1998-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_10/1998_10_statewide_rf_mm.tif",
+                    "raster_date": "1998-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_11/1998_11_statewide_rf_mm.tif",
+                    "raster_date": "1998-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1998_12/1998_12_statewide_rf_mm.tif",
+                    "raster_date": "1998-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_01/1999_01_statewide_rf_mm.tif",
+                    "raster_date": "1999-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_02/1999_02_statewide_rf_mm.tif",
+                    "raster_date": "1999-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_03/1999_03_statewide_rf_mm.tif",
+                    "raster_date": "1999-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_04/1999_04_statewide_rf_mm.tif",
+                    "raster_date": "1999-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_05/1999_05_statewide_rf_mm.tif",
+                    "raster_date": "1999-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_06/1999_06_statewide_rf_mm.tif",
+                    "raster_date": "1999-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_07/1999_07_statewide_rf_mm.tif",
+                    "raster_date": "1999-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_08/1999_08_statewide_rf_mm.tif",
+                    "raster_date": "1999-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_09/1999_09_statewide_rf_mm.tif",
+                    "raster_date": "1999-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_10/1999_10_statewide_rf_mm.tif",
+                    "raster_date": "1999-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_11/1999_11_statewide_rf_mm.tif",
+                    "raster_date": "1999-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/1999_12/1999_12_statewide_rf_mm.tif",
+                    "raster_date": "1999-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_01/2000_01_statewide_rf_mm.tif",
+                    "raster_date": "2000-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_02/2000_02_statewide_rf_mm.tif",
+                    "raster_date": "2000-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_03/2000_03_statewide_rf_mm.tif",
+                    "raster_date": "2000-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_04/2000_04_statewide_rf_mm.tif",
+                    "raster_date": "2000-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_05/2000_05_statewide_rf_mm.tif",
+                    "raster_date": "2000-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_06/2000_06_statewide_rf_mm.tif",
+                    "raster_date": "2000-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_07/2000_07_statewide_rf_mm.tif",
+                    "raster_date": "2000-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_08/2000_08_statewide_rf_mm.tif",
+                    "raster_date": "2000-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_09/2000_09_statewide_rf_mm.tif",
+                    "raster_date": "2000-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_10/2000_10_statewide_rf_mm.tif",
+                    "raster_date": "2000-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_11/2000_11_statewide_rf_mm.tif",
+                    "raster_date": "2000-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2000_12/2000_12_statewide_rf_mm.tif",
+                    "raster_date": "2000-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_01/2001_01_statewide_rf_mm.tif",
+                    "raster_date": "2001-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_02/2001_02_statewide_rf_mm.tif",
+                    "raster_date": "2001-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_03/2001_03_statewide_rf_mm.tif",
+                    "raster_date": "2001-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_04/2001_04_statewide_rf_mm.tif",
+                    "raster_date": "2001-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_05/2001_05_statewide_rf_mm.tif",
+                    "raster_date": "2001-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_06/2001_06_statewide_rf_mm.tif",
+                    "raster_date": "2001-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_07/2001_07_statewide_rf_mm.tif",
+                    "raster_date": "2001-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_08/2001_08_statewide_rf_mm.tif",
+                    "raster_date": "2001-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_09/2001_09_statewide_rf_mm.tif",
+                    "raster_date": "2001-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_10/2001_10_statewide_rf_mm.tif",
+                    "raster_date": "2001-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_11/2001_11_statewide_rf_mm.tif",
+                    "raster_date": "2001-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2001_12/2001_12_statewide_rf_mm.tif",
+                    "raster_date": "2001-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_01/2002_01_statewide_rf_mm.tif",
+                    "raster_date": "2002-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_02/2002_02_statewide_rf_mm.tif",
+                    "raster_date": "2002-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_03/2002_03_statewide_rf_mm.tif",
+                    "raster_date": "2002-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_04/2002_04_statewide_rf_mm.tif",
+                    "raster_date": "2002-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_05/2002_05_statewide_rf_mm.tif",
+                    "raster_date": "2002-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_06/2002_06_statewide_rf_mm.tif",
+                    "raster_date": "2002-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_07/2002_07_statewide_rf_mm.tif",
+                    "raster_date": "2002-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_08/2002_08_statewide_rf_mm.tif",
+                    "raster_date": "2002-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_09/2002_09_statewide_rf_mm.tif",
+                    "raster_date": "2002-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_10/2002_10_statewide_rf_mm.tif",
+                    "raster_date": "2002-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_11/2002_11_statewide_rf_mm.tif",
+                    "raster_date": "2002-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2002_12/2002_12_statewide_rf_mm.tif",
+                    "raster_date": "2002-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_01/2003_01_statewide_rf_mm.tif",
+                    "raster_date": "2003-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_02/2003_02_statewide_rf_mm.tif",
+                    "raster_date": "2003-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_03/2003_03_statewide_rf_mm.tif",
+                    "raster_date": "2003-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_04/2003_04_statewide_rf_mm.tif",
+                    "raster_date": "2003-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_05/2003_05_statewide_rf_mm.tif",
+                    "raster_date": "2003-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_06/2003_06_statewide_rf_mm.tif",
+                    "raster_date": "2003-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_07/2003_07_statewide_rf_mm.tif",
+                    "raster_date": "2003-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_08/2003_08_statewide_rf_mm.tif",
+                    "raster_date": "2003-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_09/2003_09_statewide_rf_mm.tif",
+                    "raster_date": "2003-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_10/2003_10_statewide_rf_mm.tif",
+                    "raster_date": "2003-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_11/2003_11_statewide_rf_mm.tif",
+                    "raster_date": "2003-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2003_12/2003_12_statewide_rf_mm.tif",
+                    "raster_date": "2003-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_01/2004_01_statewide_rf_mm.tif",
+                    "raster_date": "2004-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_02/2004_02_statewide_rf_mm.tif",
+                    "raster_date": "2004-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_03/2004_03_statewide_rf_mm.tif",
+                    "raster_date": "2004-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_04/2004_04_statewide_rf_mm.tif",
+                    "raster_date": "2004-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_05/2004_05_statewide_rf_mm.tif",
+                    "raster_date": "2004-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_06/2004_06_statewide_rf_mm.tif",
+                    "raster_date": "2004-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_07/2004_07_statewide_rf_mm.tif",
+                    "raster_date": "2004-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_08/2004_08_statewide_rf_mm.tif",
+                    "raster_date": "2004-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_09/2004_09_statewide_rf_mm.tif",
+                    "raster_date": "2004-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_10/2004_10_statewide_rf_mm.tif",
+                    "raster_date": "2004-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_11/2004_11_statewide_rf_mm.tif",
+                    "raster_date": "2004-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2004_12/2004_12_statewide_rf_mm.tif",
+                    "raster_date": "2004-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_01/2005_01_statewide_rf_mm.tif",
+                    "raster_date": "2005-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_02/2005_02_statewide_rf_mm.tif",
+                    "raster_date": "2005-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_03/2005_03_statewide_rf_mm.tif",
+                    "raster_date": "2005-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_04/2005_04_statewide_rf_mm.tif",
+                    "raster_date": "2005-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_05/2005_05_statewide_rf_mm.tif",
+                    "raster_date": "2005-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_06/2005_06_statewide_rf_mm.tif",
+                    "raster_date": "2005-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_07/2005_07_statewide_rf_mm.tif",
+                    "raster_date": "2005-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_08/2005_08_statewide_rf_mm.tif",
+                    "raster_date": "2005-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_09/2005_09_statewide_rf_mm.tif",
+                    "raster_date": "2005-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_10/2005_10_statewide_rf_mm.tif",
+                    "raster_date": "2005-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_11/2005_11_statewide_rf_mm.tif",
+                    "raster_date": "2005-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2005_12/2005_12_statewide_rf_mm.tif",
+                    "raster_date": "2005-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_01/2006_01_statewide_rf_mm.tif",
+                    "raster_date": "2006-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_02/2006_02_statewide_rf_mm.tif",
+                    "raster_date": "2006-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_03/2006_03_statewide_rf_mm.tif",
+                    "raster_date": "2006-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_04/2006_04_statewide_rf_mm.tif",
+                    "raster_date": "2006-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_05/2006_05_statewide_rf_mm.tif",
+                    "raster_date": "2006-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_06/2006_06_statewide_rf_mm.tif",
+                    "raster_date": "2006-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_07/2006_07_statewide_rf_mm.tif",
+                    "raster_date": "2006-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_08/2006_08_statewide_rf_mm.tif",
+                    "raster_date": "2006-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_09/2006_09_statewide_rf_mm.tif",
+                    "raster_date": "2006-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_10/2006_10_statewide_rf_mm.tif",
+                    "raster_date": "2006-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_11/2006_11_statewide_rf_mm.tif",
+                    "raster_date": "2006-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2006_12/2006_12_statewide_rf_mm.tif",
+                    "raster_date": "2006-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_01/2007_01_statewide_rf_mm.tif",
+                    "raster_date": "2007-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_02/2007_02_statewide_rf_mm.tif",
+                    "raster_date": "2007-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_03/2007_03_statewide_rf_mm.tif",
+                    "raster_date": "2007-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_04/2007_04_statewide_rf_mm.tif",
+                    "raster_date": "2007-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_05/2007_05_statewide_rf_mm.tif",
+                    "raster_date": "2007-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_06/2007_06_statewide_rf_mm.tif",
+                    "raster_date": "2007-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_07/2007_07_statewide_rf_mm.tif",
+                    "raster_date": "2007-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_08/2007_08_statewide_rf_mm.tif",
+                    "raster_date": "2007-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_09/2007_09_statewide_rf_mm.tif",
+                    "raster_date": "2007-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_10/2007_10_statewide_rf_mm.tif",
+                    "raster_date": "2007-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_11/2007_11_statewide_rf_mm.tif",
+                    "raster_date": "2007-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2007_12/2007_12_statewide_rf_mm.tif",
+                    "raster_date": "2007-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_01/2008_01_statewide_rf_mm.tif",
+                    "raster_date": "2008-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_02/2008_02_statewide_rf_mm.tif",
+                    "raster_date": "2008-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_03/2008_03_statewide_rf_mm.tif",
+                    "raster_date": "2008-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_04/2008_04_statewide_rf_mm.tif",
+                    "raster_date": "2008-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_05/2008_05_statewide_rf_mm.tif",
+                    "raster_date": "2008-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_06/2008_06_statewide_rf_mm.tif",
+                    "raster_date": "2008-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_07/2008_07_statewide_rf_mm.tif",
+                    "raster_date": "2008-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_08/2008_08_statewide_rf_mm.tif",
+                    "raster_date": "2008-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_09/2008_09_statewide_rf_mm.tif",
+                    "raster_date": "2008-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_10/2008_10_statewide_rf_mm.tif",
+                    "raster_date": "2008-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_11/2008_11_statewide_rf_mm.tif",
+                    "raster_date": "2008-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2008_12/2008_12_statewide_rf_mm.tif",
+                    "raster_date": "2008-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_01/2009_01_statewide_rf_mm.tif",
+                    "raster_date": "2009-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_02/2009_02_statewide_rf_mm.tif",
+                    "raster_date": "2009-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_03/2009_03_statewide_rf_mm.tif",
+                    "raster_date": "2009-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_04/2009_04_statewide_rf_mm.tif",
+                    "raster_date": "2009-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_05/2009_05_statewide_rf_mm.tif",
+                    "raster_date": "2009-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_06/2009_06_statewide_rf_mm.tif",
+                    "raster_date": "2009-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_07/2009_07_statewide_rf_mm.tif",
+                    "raster_date": "2009-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_08/2009_08_statewide_rf_mm.tif",
+                    "raster_date": "2009-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_09/2009_09_statewide_rf_mm.tif",
+                    "raster_date": "2009-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_10/2009_10_statewide_rf_mm.tif",
+                    "raster_date": "2009-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_11/2009_11_statewide_rf_mm.tif",
+                    "raster_date": "2009-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2009_12/2009_12_statewide_rf_mm.tif",
+                    "raster_date": "2009-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_01/2010_01_statewide_rf_mm.tif",
+                    "raster_date": "2010-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_02/2010_02_statewide_rf_mm.tif",
+                    "raster_date": "2010-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_03/2010_03_statewide_rf_mm.tif",
+                    "raster_date": "2010-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_04/2010_04_statewide_rf_mm.tif",
+                    "raster_date": "2010-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_05/2010_05_statewide_rf_mm.tif",
+                    "raster_date": "2010-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_06/2010_06_statewide_rf_mm.tif",
+                    "raster_date": "2010-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_07/2010_07_statewide_rf_mm.tif",
+                    "raster_date": "2010-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_08/2010_08_statewide_rf_mm.tif",
+                    "raster_date": "2010-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_09/2010_09_statewide_rf_mm.tif",
+                    "raster_date": "2010-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_10/2010_10_statewide_rf_mm.tif",
+                    "raster_date": "2010-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_11/2010_11_statewide_rf_mm.tif",
+                    "raster_date": "2010-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2010_12/2010_12_statewide_rf_mm.tif",
+                    "raster_date": "2010-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_01/2011_01_statewide_rf_mm.tif",
+                    "raster_date": "2011-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_02/2011_02_statewide_rf_mm.tif",
+                    "raster_date": "2011-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_03/2011_03_statewide_rf_mm.tif",
+                    "raster_date": "2011-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_04/2011_04_statewide_rf_mm.tif",
+                    "raster_date": "2011-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_05/2011_05_statewide_rf_mm.tif",
+                    "raster_date": "2011-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_06/2011_06_statewide_rf_mm.tif",
+                    "raster_date": "2011-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_07/2011_07_statewide_rf_mm.tif",
+                    "raster_date": "2011-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_08/2011_08_statewide_rf_mm.tif",
+                    "raster_date": "2011-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_09/2011_09_statewide_rf_mm.tif",
+                    "raster_date": "2011-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_10/2011_10_statewide_rf_mm.tif",
+                    "raster_date": "2011-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_11/2011_11_statewide_rf_mm.tif",
+                    "raster_date": "2011-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2011_12/2011_12_statewide_rf_mm.tif",
+                    "raster_date": "2011-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_01/2012_01_statewide_rf_mm.tif",
+                    "raster_date": "2012-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_02/2012_02_statewide_rf_mm.tif",
+                    "raster_date": "2012-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_03/2012_03_statewide_rf_mm.tif",
+                    "raster_date": "2012-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_04/2012_04_statewide_rf_mm.tif",
+                    "raster_date": "2012-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_05/2012_05_statewide_rf_mm.tif",
+                    "raster_date": "2012-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_06/2012_06_statewide_rf_mm.tif",
+                    "raster_date": "2012-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_07/2012_07_statewide_rf_mm.tif",
+                    "raster_date": "2012-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_08/2012_08_statewide_rf_mm.tif",
+                    "raster_date": "2012-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_09/2012_09_statewide_rf_mm.tif",
+                    "raster_date": "2012-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_10/2012_10_statewide_rf_mm.tif",
+                    "raster_date": "2012-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_11/2012_11_statewide_rf_mm.tif",
+                    "raster_date": "2012-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2012_12/2012_12_statewide_rf_mm.tif",
+                    "raster_date": "2012-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_01/2013_01_statewide_rf_mm.tif",
+                    "raster_date": "2013-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_02/2013_02_statewide_rf_mm.tif",
+                    "raster_date": "2013-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_03/2013_03_statewide_rf_mm.tif",
+                    "raster_date": "2013-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_04/2013_04_statewide_rf_mm.tif",
+                    "raster_date": "2013-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_05/2013_05_statewide_rf_mm.tif",
+                    "raster_date": "2013-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_06/2013_06_statewide_rf_mm.tif",
+                    "raster_date": "2013-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_07/2013_07_statewide_rf_mm.tif",
+                    "raster_date": "2013-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_08/2013_08_statewide_rf_mm.tif",
+                    "raster_date": "2013-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_09/2013_09_statewide_rf_mm.tif",
+                    "raster_date": "2013-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_10/2013_10_statewide_rf_mm.tif",
+                    "raster_date": "2013-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_11/2013_11_statewide_rf_mm.tif",
+                    "raster_date": "2013-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2013_12/2013_12_statewide_rf_mm.tif",
+                    "raster_date": "2013-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_01/2014_01_statewide_rf_mm.tif",
+                    "raster_date": "2014-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_02/2014_02_statewide_rf_mm.tif",
+                    "raster_date": "2014-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_03/2014_03_statewide_rf_mm.tif",
+                    "raster_date": "2014-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_04/2014_04_statewide_rf_mm.tif",
+                    "raster_date": "2014-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_05/2014_05_statewide_rf_mm.tif",
+                    "raster_date": "2014-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_06/2014_06_statewide_rf_mm.tif",
+                    "raster_date": "2014-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_07/2014_07_statewide_rf_mm.tif",
+                    "raster_date": "2014-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_08/2014_08_statewide_rf_mm.tif",
+                    "raster_date": "2014-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_09/2014_09_statewide_rf_mm.tif",
+                    "raster_date": "2014-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_10/2014_10_statewide_rf_mm.tif",
+                    "raster_date": "2014-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_11/2014_11_statewide_rf_mm.tif",
+                    "raster_date": "2014-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2014_12/2014_12_statewide_rf_mm.tif",
+                    "raster_date": "2014-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_01/2015_01_statewide_rf_mm.tif",
+                    "raster_date": "2015-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_02/2015_02_statewide_rf_mm.tif",
+                    "raster_date": "2015-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_03/2015_03_statewide_rf_mm.tif",
+                    "raster_date": "2015-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_04/2015_04_statewide_rf_mm.tif",
+                    "raster_date": "2015-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_05/2015_05_statewide_rf_mm.tif",
+                    "raster_date": "2015-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_06/2015_06_statewide_rf_mm.tif",
+                    "raster_date": "2015-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_07/2015_07_statewide_rf_mm.tif",
+                    "raster_date": "2015-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_08/2015_08_statewide_rf_mm.tif",
+                    "raster_date": "2015-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_09/2015_09_statewide_rf_mm.tif",
+                    "raster_date": "2015-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_10/2015_10_statewide_rf_mm.tif",
+                    "raster_date": "2015-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_11/2015_11_statewide_rf_mm.tif",
+                    "raster_date": "2015-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2015_12/2015_12_statewide_rf_mm.tif",
+                    "raster_date": "2015-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_01/2016_01_statewide_rf_mm.tif",
+                    "raster_date": "2016-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_02/2016_02_statewide_rf_mm.tif",
+                    "raster_date": "2016-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_03/2016_03_statewide_rf_mm.tif",
+                    "raster_date": "2016-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_04/2016_04_statewide_rf_mm.tif",
+                    "raster_date": "2016-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_05/2016_05_statewide_rf_mm.tif",
+                    "raster_date": "2016-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_06/2016_06_statewide_rf_mm.tif",
+                    "raster_date": "2016-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_07/2016_07_statewide_rf_mm.tif",
+                    "raster_date": "2016-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_08/2016_08_statewide_rf_mm.tif",
+                    "raster_date": "2016-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_09/2016_09_statewide_rf_mm.tif",
+                    "raster_date": "2016-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_10/2016_10_statewide_rf_mm.tif",
+                    "raster_date": "2016-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_11/2016_11_statewide_rf_mm.tif",
+                    "raster_date": "2016-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2016_12/2016_12_statewide_rf_mm.tif",
+                    "raster_date": "2016-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_01/2017_01_statewide_rf_mm.tif",
+                    "raster_date": "2017-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_02/2017_02_statewide_rf_mm.tif",
+                    "raster_date": "2017-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_03/2017_03_statewide_rf_mm.tif",
+                    "raster_date": "2017-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_04/2017_04_statewide_rf_mm.tif",
+                    "raster_date": "2017-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_05/2017_05_statewide_rf_mm.tif",
+                    "raster_date": "2017-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_06/2017_06_statewide_rf_mm.tif",
+                    "raster_date": "2017-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_07/2017_07_statewide_rf_mm.tif",
+                    "raster_date": "2017-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_08/2017_08_statewide_rf_mm.tif",
+                    "raster_date": "2017-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_09/2017_09_statewide_rf_mm.tif",
+                    "raster_date": "2017-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_10/2017_10_statewide_rf_mm.tif",
+                    "raster_date": "2017-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_11/2017_11_statewide_rf_mm.tif",
+                    "raster_date": "2017-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2017_12/2017_12_statewide_rf_mm.tif",
+                    "raster_date": "2017-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_01/2018_01_statewide_rf_mm.tif",
+                    "raster_date": "2018-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_02/2018_02_statewide_rf_mm.tif",
+                    "raster_date": "2018-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_03/2018_03_statewide_rf_mm.tif",
+                    "raster_date": "2018-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_04/2018_04_statewide_rf_mm.tif",
+                    "raster_date": "2018-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_05/2018_05_statewide_rf_mm.tif",
+                    "raster_date": "2018-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_06/2018_06_statewide_rf_mm.tif",
+                    "raster_date": "2018-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_07/2018_07_statewide_rf_mm.tif",
+                    "raster_date": "2018-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_08/2018_08_statewide_rf_mm.tif",
+                    "raster_date": "2018-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_09/2018_09_statewide_rf_mm.tif",
+                    "raster_date": "2018-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_10/2018_10_statewide_rf_mm.tif",
+                    "raster_date": "2018-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_11/2018_11_statewide_rf_mm.tif",
+                    "raster_date": "2018-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2018_12/2018_12_statewide_rf_mm.tif",
+                    "raster_date": "2018-12",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_01/2019_01_statewide_rf_mm.tif",
+                    "raster_date": "2019-01",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_02/2019_02_statewide_rf_mm.tif",
+                    "raster_date": "2019-02",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_03/2019_03_statewide_rf_mm.tif",
+                    "raster_date": "2019-03",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_04/2019_04_statewide_rf_mm.tif",
+                    "raster_date": "2019-04",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_05/2019_05_statewide_rf_mm.tif",
+                    "raster_date": "2019-05",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_06/2019_06_statewide_rf_mm.tif",
+                    "raster_date": "2019-06",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_07/2019_07_statewide_rf_mm.tif",
+                    "raster_date": "2019-07",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_08/2019_08_statewide_rf_mm.tif",
+                    "raster_date": "2019-08",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_09/2019_09_statewide_rf_mm.tif",
+                    "raster_date": "2019-09",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_10/2019_10_statewide_rf_mm.tif",
+                    "raster_date": "2019-10",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_11/2019_11_statewide_rf_mm.tif",
+                    "raster_date": "2019-11",
+                    "ext_data": {}
+                },
+                {
+                    "raster_file": "/home/mcleanj/rfing/data/all_rf_data/allMonYrData/2019_12/2019_12_statewide_rf_mm.tif",
+                    "raster_date": "2019-12",
+                    "ext_data": {}
+                }
+            ]
+        }
+    ],
+    "station_file_data": []
+}

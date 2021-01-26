@@ -8,7 +8,7 @@ from ingestion_handler import ingestion_handler
 from sys import stderr, argv
 from os.path import join
 from geotiff_data import GeotiffData
-
+from ingestion_handler import ingestion_handler
 
 
 
@@ -26,20 +26,34 @@ comm = MPI.COMM_WORLD
 
 distributor_rank = 0
 
-##########################################
-
-#process rank
-rank = comm.Get_rank()
-processor_name = MPI.Get_processor_name()
-
-##########################################
+#load config
+if len(argv) < 2:
+    raise RuntimeError("Invalid command line args. Must provide config file")
+config_file = argv[1]
+config = None
+with open(config_file) as f:
+    config = json.load(f)
 
 #everything needs version, so make global
 #unique version number for the data set, should change with each run
 version = config["version"]
 
+##########################################
+
+#process rank
+rank = comm.Get_rank()
+processor_name = MPI.Get_processor_name()
+doc_num = 0
+
+##########################################
+
+
 #remember $date IS necessary
 
+
+def get_doc_name(doc_type):
+    doc_names = config["doc_names"]
+    return doc_names[doc_type]
 
 # XYYYY.MM.DD
 def parse_date(date, period):
@@ -69,10 +83,217 @@ def parse_date(date, period):
     return parsed_date
 
 
-def handle_geotiff(file, include_header):
-    data = GeotiffData(file)
+
+#data, bash_file, meta_file, cleanup, retry, delay = 0
+def send_doc(doc):
+    bash_file = config["bash_file"]
+    outdir = config["outdir"]
+    cleanup = config["cleanup"]
+    retry = config["retry"]
+
+    meta_file = "doc_%d_%d" % (doc_num, rank)
+    doc_num += 1
+    meta_file = join(outdir, meta_file)
+    
+    ingestion_handler(doc, bash_file, meta_file, cleanup, retry)
+
+
+def handle_station_metadata(file, data):
+    classification = data["classification"]
+    subclassification = data["subclassification"]
+    metadata_cols = data["metadata_cols"]
+    field_name_translations = data["field_name_translations"]
+    units = data["units"]
+    ext = data["ext"]
+
+    
+    with open(file, "r") as fd:
+        reader = csv.reader(fd)
+        header = None
+        for row in reader:
+            if header is None:
+                header = row[metadata_cols[0], metadata_cols[1]]
+            else:
+                value = {}
+                for i in range(metadata_cols[0], metadata_cols[1]):
+                    col = header[i]
+                    col_trans = field_name_translations[col]
+                    item = row[i]
+                    value[col_trans] = item
+                doc_name = get_doc_name("station_metadata")
+                #set subclass to null
+                meta_doc = {
+                    "name": doc_name,
+                    "version": version,
+                    "value": {
+                        "classification": classification,
+                        "subclassification": subclassification,
+                        "units": units,
+                        "ext": ext,
+                        "data": value
+                    }
+                }
+                send_doc(meta_doc)
+
+
+
+
+
+#note the range is inclusive at both ends
+def get_active_range(data, nodata, dates):
+    active_range = None
+    start = None
+    end = None
+    for i in len(data):
+        item = data[i]
+        if item != nodata:
+            end = i
+            if start is None:
+                start = i
+    if start is not None:
+        active_range = [dates[start], dates[end]]
+    return active_range
+
+def handle_station_values(file, data):
+    classification = data["classification"]
+    subclassification = data["subclassification"]
+    data_col_start = data["data_col_start"]
+    fill = data["fill"]
+    period = data["period"]
+    skn_col = data["skn_col"]
+    ext = data["ext"]
+    nodata = data["nodata"]
+
+    #this is for the values document, not metadata file should be handled separately
+    #single initial column should be skn
+    with open(file, "r") as fd:
+        reader = csv.reader(fd)
+        dates = None
+        for row in reader:
+            if dates is None:
+                dates = row[data_col_start[0]]
+                #transform dates
+                for i in range(len(dates)):
+                    dates[i] = parse_date(dates[i], period)
+            else:
+                skn = row[skn_col]
+                values = row[data_col_start[0]]
+                active_range = get_active_range(values, nodata, dates)
+                doc_name = get_doc_name("active_range")
+                active_range_doc = {
+                    "name": doc_name,
+                    "version": version,
+                    "value": {
+                        "skn": skn,
+                        "active_range": {
+                            "start": {
+                                "$date:": active_range[0]
+                            },
+                            "end": { 
+                                "$date": active_range[1]
+                            }
+                        }
+                    }
+                }
+
+                #send off active range doc
+                send_doc(active_range_doc)
+
+                doc_name = get_doc_name("station_value")
+                for i in range(len(values)):
+                    value = values[i]
+                    if value != nodata:
+                        value_doc = {
+                            "name": doc_name,
+                            "version": version,
+                            "value": {
+                                "classification": classification,
+                                "subclassification": subclassification,
+                                "skn": skn,
+                                "period": period,
+                                "date": {
+                                    "$date": dates[i]
+                                },
+                                "ext": ext,
+                                "value": value
+                            }
+                        }
+                        send_doc(value_doc)
+
+
+
+def handle_geotiff(file, data):
+    header_id = data["header_id"]
+    classification = data["classification"]
+    subclassification = data["subclassification"]
+    units = data["units"]
+    period = data["period"]
+    date = data["date"]
+    ext = data["ext"]
+    include_header =  data["include_header"]
+
+    geotiff_data = GeotiffData(file)
+
     if include_header:
-        pass
+        doc_name = get_doc_name("raster_header")
+        raster_header_doc = {
+            "name": doc_name,
+            "version": version,
+            "value": {
+                "id": header_id,
+                "data": geotiff_data.header
+            }
+        }
+
+    doc_name = get_doc_name("raster")
+    raster_doc = {
+        "name": doc_name,
+        "version": version,
+        "value": {
+            "header_id": header_id,
+            "classification": classification,
+            "subclassification": subclassification,
+            "units": units,
+            "period": period,
+            "date": {
+                "$date": date
+            },
+            "ext" : ext,
+            "data": geotiff_data.data
+        }
+    }
+
+
+
+def handle_info():
+    
+    try:
+        #send rank to request data
+        info = comm.sendrecv(rank, dest = distributor_rank)
+        #process data and request more until terminator received from distributor
+        while info is not None:
+            try:
+                file = info["file"]
+                data = info["data"]
+                #three types
+                if info.type == "raster":
+                    handle_geotiff(file, data)
+                elif info.type == "station_vals":
+                    handle_station_values(file, data)
+                elif info.type == "station_metadata":
+                    handle_station_metadata(file, data)
+                else:
+                    raise RuntimeError("Unknown document type.")
+            except Exception as e:
+                pass
+                    
+            data = comm.sendrecv(rank, dest = distributor_rank)
+            print("Rank %d received terminator. Exiting data handler..." % rank)
+    except Exception as e:
+        print("An error has occured in rank %d while handling data: %s" % (rank, e), file = stderr)
+        print("Rank %d encountered an error. Exiting data handler..." % rank)
+        #notify the distributor that one of the ranks failed and will not be requesting more data by sending -1
+        comm.send(-1, dest = distributor_rank)
 
 
 
@@ -132,6 +353,7 @@ def distribute():
         raster_units = raster_file_data_item["units"]
         #include header id in case want extend to multiple headers later (change in resolution, spatial extent, etc), can use something like "hawaii_statewide_default" or something like that
         raster_header_id = raster_file_data_item["header_id"]
+        #note that items should not include header if already added
         include_header = raster_file_data_item["include_header"]
 
         raster_file_info = raster_file_data_item["raster_file_info"]
@@ -140,10 +362,7 @@ def distribute():
             #this is the only thing that should change on a per file basis
             raster_date = raster_file_info_item["raster_date"]
             #any additional information unique to this set of rasters (non-standard fields), just set to null if there are none
-            raster_ext = raster_file_info_item["ext_data"]
-
-
-                
+            raster_ext = raster_file_info_item["ext_data"]   
 
             header_complete = True
 
@@ -165,39 +384,6 @@ def distribute():
             }
             
             send_info(info)
-
-            #######
-            
-            raster_header_doc = {
-                "name": doc_names["raster_header"],
-                "version": version,
-                "value": {
-                    "id": raster_header_id
-                    "data": None
-                }
-            }
-
-            raster_doc = {
-                "name": doc_names["raster"],
-                "version": version,
-                "value": {
-                    "header_id": raster_header_id,
-                    "classification": raster_classification,
-                    "subclassification": raster_subclassification,
-                    "units": raster_units,
-                    "period": raster_period,
-                    "date": {
-                        "$date": raster_date
-                    },
-                    "ext" : raster_ext,
-                    "data": None
-                }
-            }
-
-
-
-
-
 
     ###################################################
 
@@ -229,11 +415,15 @@ def distribute():
             #can also use this to indicate no associated station data implicitly since returns no data rather than having it indicated by dataset in application
             #so application can assume always have both, and if there's no rainfall stations then it just won't have anything to display, same result with lower complexity
 
+            #put units in metadata, should be uniform for class/subclass (station metadata set)
             info = {
                 "type": "station_metadata",
                 "data": {
+                    "classification": station_classification,
+                    "subclassification": station_subclassification,
                     "metadata_cols": metadata_cols,
                     "field_name_translations": metadata_field_name_translation,
+                    "units": station_units,
                     "ext": metadata_ext
                 },
                 "file": metadata_file
@@ -243,139 +433,27 @@ def distribute():
         for station_file_info_item in station_file_info:
 
             station_skn_col = station_file_info_item["skn_col"]
-            data_cols = station_file_info_item["data_cols"]
+            data_col_start = station_file_info_item["data_col_start"]
 
             station_fill = station_file_info_item["fill"]
             station_period = station_file_info_item["period"]
+            station_val_ext = station_file_info_item["ext_data"]
+            station_file_nodata = station_file_info_item["nodata"]
 
             info = {
-                "type": "station_metadata",
+                "type": "station_vals",
                 "data": {
-                    "metadata_cols": metadata_cols,
-                    "field_name_translations": metadata_field_name_translation,
-                    "ext": metadata_ext
+                    "classification": station_classification,
+                    "subclassification": station_subclassification,
+                    "data_col_start": data_col_start,
+                    "fill": station_fill,
+                    "period": station_period,
+                    "skn_col": station_skn_col,
+                    "nodata": station_file_nodata,
+                    "ext": station_val_ext
                 },
                 "file": metadata_file
             }
-
-
-
-
-
-    ##################################################################
-
-
-    
-
-    #migrate to config
-    trans = {
-        "SKN": "skn",
-        "Station.Name": "name",
-        "OBSERVER": "observer",
-        "Network": "network",
-        "Island": "island",
-        "ELEV.m.": "elevation_m",
-        "LAT": "lat",
-        "LON": "lng",
-        "NCEI.id": "ncei_id",
-        "NWS.id": "nws_id",
-        "NESDIS.id": "nesdis_id",
-        "SCAN.id": "scan_id",
-        "SMART_NODE_RF.id": "smart_node_rf_id"
-    }
-
-
-    #temp, fill in actual info please (config?)
-    metadata_columns = 10
-    meta_file = ""
-    values_file = ""
-    id_col = "SKN"
-    nodata = "NA"
-    classification = "rainfall"
-
-    #also need fill types
-
-    #note the range is inclusive at both ends
-    def get_active_range(data, dates):
-        active_range = None
-        start = None
-        end = None
-        for i in len(row):
-            item = row[i]
-            if item == nodata:
-                end = i
-                if start is None:
-                    start = i
-        if start is not None:
-            active_range = [dates[start], dates[end]]
-        return active_range
-
-    def wrap_date(date):
-        return {
-            "$date": date
-        }
-
-    if meta_file is not None:
-        with open(meta_file, "r") as fd:
-            reader = csv.reader(fd)
-            header = None
-            for row in reader:
-                if header is None:
-                    header = row
-                else:
-                    value = {}
-                    for i in range(len(row)):
-                        col = header[i]
-                        col_trans = trans[col]
-                        item = row[i]
-                        value[col_trans] = item
-                    #set subclass to null
-                    meta_doc = {
-                        "classification": classification,
-                        "value": value
-                    }
-                    send_doc(meta_doc)
-
-
-    if values_file is not None:
-        #this is for the values document, not metadata file should be handled separately
-        #single initial column should be skn
-        with open(values_file, "r") as fd:
-            reader = csv.reader(fd)
-            header = None
-            dates = None
-            for row in reader:
-                if header is None:
-                    header = row
-                    #
-                    dates = row[1:]
-                else:
-                    skn = row[0]
-                    data = row[1:]
-                    active_range = get_active_range(data, dates)
-
-                    active_range_doc = {
-                        "skn": skn,
-                        "active_range": {
-                            "start": wrap_date(active_range[0]),
-                            "end": wrap_date(active_range[1])
-                        }
-                    }
-
-                    #send off active range doc
-                    send_doc(active_range_doc)
-
-
-                    for value in data:
-                        value_doc = {
-                            "classification": classification,
-                            "subclassification": None,
-                            "skn": skn,
-                            "unit": "mm",
-                            "granularity": "monthly",
-                            "value": value
-                        }
-                        send_doc(value_doc)
 
     while ranks > 0:
         recv_rank = comm.recv()
@@ -387,150 +465,15 @@ def distribute():
 
 
 
-
-
-
-
     
-
-#three separate objects, one with active date range
-#put time series granularities into metadata so know what types of value docs are available
-
-def data_handler():
-    i = 0
-    try:
-        #send rank to request data
-        data = comm.sendrecv(rank, dest = distributor_rank)
-        #process data and request more until terminator received from distributor
-        while data is not None:
-            out_name = "data_%d_%d" % (rank, i)
-            i += 1
-            try:
-                ingestion_handler(data, bash_file, out_name, cleanup, retry)
-            except Exception as e:
-                pass
-                    
-            data = comm.sendrecv(rank, dest = distributor_rank)
-            print("Rank %d received terminator. Exiting data handler..." % rank)
-    except Exception as e:
-        print("An error has occured in rank %d while handling data: %s" % (rank, e), file = stderr)
-        print("Rank %d encountered an error. Exiting data handler..." % rank)
-        #notify the distributor that one of the ranks failed and will not be requesting more data by sending -1
-        comm.send(-1, dest = distributor_rank)
 
 
 ##########################################
 
 
-config_file = "./config.json"
-config = None
-if len(argv) > 1:
-    config_file = argv[1]
-with open(config_file, "r") as f:
-    config = json.load(f)
-
-basedata_f = config["basedata"]
-data_file = config["data_file"]
-bash_file = config["bash_file"]
-failure_file = config["failure_file"]
-processes = config["processes"]
-threads = config["threads"]
-cleanup = config["cleanup"]
-retry = config["retry"]
-outdir = config["output_dir"]
-date_format = config["date_format"]
-date_format = re.compile(date_format)
-
-basedata = None
-with open(basedata_f, "r") as f:
-    basedata = json.load(f)
-
-
-
-
-
-def handle_row(row, header, failure_lock):
-    skn = row[0]
-    with ThreadPoolExecutor(threads) as t_exec:
-        for i in range(1, len(row)):
-            date = header[i]
-            value = row[i]
-            data = deepcopy(basedata)
-            data["value"]["skn"] = skn
-            data["value"]["date"] = date
-            data["value"]["value"] = value
-            meta_file = "%s_doc_%d.json" % (skn, i)
-            meta_file = join(outdir, meta_file)
-            f = t_exec.submit(ingestion_handler, data, bash_file, meta_file, cleanup, retry)
-            def cb(date):
-                def _cb(f):
-                    #print(f.result())
-                    e = f.exception()
-                    if e is not None:
-                        print(e, file = stderr)
-                        #log failure
-                        #cbs may be called from other thread, so lock file to be safe
-                        with failure_lock:
-                            with open(failure_file, "a") as failure_log:
-                                failure_log.write("%s,%s\n" % (skn, date))
-                return _cb
-            f.add_done_callback(cb(date))
-    print("Completed skn %s" % skn)
-
-
-
-
-# XYYYY.MM.DD
-def parse_date(date):
-    match = re.match(date_format, date)
-    if match is None:
-        raise ValueError("Invalid date.")
-    year = match.group(1)
-    month = match.group(2)
-    day = match.group(3)
-    #note don't need time
-    parsed_date = "%s-%s-%s" % (year, month, day) 
-    return parsed_date
-
-
-def main():
-    #init failure log
-    with open(failure_file, "w") as failure_log:
-        failure_log.write("skn,date\n")
-    manager = Manager()
-    #need managed lock since interprocess, note this generates an additional process
-    failure_lock = manager.Lock()
-    throttle_limit = processes + 10
-    throttle = Semaphore(throttle_limit)
-    with ProcessPoolExecutor(processes) as p_exec:
-        with open(data_file, "r") as fd:
-            reader = csv.reader(fd)
-            header = None
-            for row in reader:
-                if header is None:
-                    header = row
-                    #translate date header fields to proper date format
-                    #first item should be skn
-                    for i in range(1, len(row)):
-                        date = row[i]
-                        parsed_date = parse_date(date)
-                        header[i] = parsed_date
-                else:
-                    throttle.acquire()
-                    f = p_exec.submit(handle_row, row, header, failure_lock)
-                    def cb(f):
-                        e = f.exception()
-                        if e is not None:
-                            print(e, file = stderr)
-                        throttle.release()
-                    f.add_done_callback(cb)
-    print("Complete!")
-
-                    
-
-
-
-
-
-if __name__ == "__main__":
-    main()
+if rank == distributor_rank:
+    print("Starting distributor, rank: %d, node: %s" % (rank, processor_name))
+    distribute()
+else:
+    print("Starting data handler, rank: %d, node: %s" % (rank, processor_name))
+    handle_info()

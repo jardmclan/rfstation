@@ -7,7 +7,7 @@ from copy import deepcopy
 from ingestion_handler import ingestion_handler
 from sys import stderr, argv
 from os.path import join
-from geotiff_data import GeotiffData
+from geotiff_data import RasterData
 from ingestion_handler import ingestion_handler
 
 
@@ -232,7 +232,7 @@ def handle_geotiff(file, data):
     ext = data["ext"]
     include_header =  data["include_header"]
 
-    geotiff_data = GeotiffData(file)
+    geotiff_data = RasterData(file)
 
     if include_header:
         doc_name = get_doc_name("raster_header")

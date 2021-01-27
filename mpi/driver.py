@@ -118,9 +118,11 @@ def handle_station_metadata(file, data):
                 value = {}
                 for i in range(metadata_cols[0], metadata_cols[1]):
                     col = header[i]
-                    col_trans = field_name_translations[col]
-                    item = row[i]
-                    value[col_trans] = item
+                    col_trans = field_name_translations.get(col)
+                    #if no column translation then this is probably just an erroneous column, ignore
+                    if col_trans is not None:
+                        item = row[i]
+                        value[col_trans] = item
                 doc_name = get_doc_name("station_metadata")
                 #set subclass to null
                 meta_doc = {
@@ -245,6 +247,7 @@ def handle_geotiff(file, data):
                 "data": geotiff_data.header
             }
         }
+        send_doc(raster_header_doc)
 
     doc_name = get_doc_name("raster")
     raster_doc = {
@@ -263,6 +266,7 @@ def handle_geotiff(file, data):
             "data": geotiff_data.data
         }
     }
+    send_doc(raster_doc)
 
 
 
@@ -289,7 +293,7 @@ def handle_info():
                 pass
                     
             data = comm.sendrecv(rank, dest = distributor_rank)
-            print("Rank %d received terminator. Exiting data handler..." % rank)
+        print("Rank %d received terminator. Exiting data handler..." % rank)
     except Exception as e:
         print("An error has occured in rank %d while handling data: %s" % (rank, e), file = stderr)
         print("Rank %d encountered an error. Exiting data handler..." % rank)
@@ -305,6 +309,10 @@ def handle_info():
 #should separate station metadata and 
 
 #note fill type SHOULD be a standard field, if just raw data it would just be unfilled
+
+#!!!
+#apparently the metadata stuff is reused a lot and there are a lot that are mixed together, so let's just create a single id tag for a metadata set and have that referenced by the value docs (so can reuse or have multiples if need, solves everything)
+#note that metadata can now have multiple unit types since can track multiple things, so move to value docs
 
 def distribute():
 

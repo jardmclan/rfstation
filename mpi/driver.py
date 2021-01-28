@@ -230,7 +230,7 @@ def handle_station_values(file, data):
 
 
 def handle_geotiff(file, data):
-    print(file)
+    print("handling geotiff")
     header_id = data["header_id"]
     classification = data["classification"]
     subclassification = data["subclassification"]
@@ -284,22 +284,20 @@ def handle_info():
         info = comm.sendrecv(rank, dest = distributor_rank)
         #process data and request more until terminator received from distributor
         while info is not None:
-            try:
-                print(info["file"])
-                print(info["type"])
-                file = info["file"]
-                data = info["data"]
-                #three types
-                if info["type"] == "raster":
-                    handle_geotiff(file, data)
-                elif info["type"] == "station_vals":
-                    handle_station_values(file, data)
-                elif info["type"] == "station_metadata":
-                    handle_station_metadata(file, data)
-                else:
-                    raise RuntimeError("Unknown document type.")
-            except Exception as e:
-                pass
+            # try:
+            file = info["file"]
+            data = info["data"]
+            #three types
+            if info["type"] == "raster":
+                handle_geotiff(file, data)
+            elif info["type"] == "station_vals":
+                handle_station_values(file, data)
+            elif info["type"] == "station_metadata":
+                handle_station_metadata(file, data)
+            else:
+                raise RuntimeError("Unknown document type.")
+            # except Exception as e:
+            #     #
                     
             info = comm.sendrecv(rank, dest = distributor_rank)
         print("Rank %d received terminator. Exiting data handler..." % rank)

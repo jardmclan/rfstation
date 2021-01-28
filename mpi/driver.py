@@ -285,10 +285,12 @@ def handle_info():
         #process data and request more until terminator received from distributor
         while info is not None:
             try:
+                print(info["file"])
+                print(info["type"])
                 file = info["file"]
                 data = info["data"]
                 #three types
-                if info.type == "raster":
+                if info["type"] == "raster":
                     handle_geotiff(file, data)
                 elif info.type == "station_vals":
                     handle_station_values(file, data)
@@ -299,7 +301,7 @@ def handle_info():
             except Exception as e:
                 pass
                     
-            data = comm.sendrecv(rank, dest = distributor_rank)
+            info = comm.sendrecv(rank, dest = distributor_rank)
         print("Rank %d received terminator. Exiting data handler..." % rank)
     except Exception as e:
         print("An error has occured in rank %d while handling data: %s" % (rank, e), file = stderr)

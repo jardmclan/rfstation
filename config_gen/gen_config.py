@@ -29,10 +29,7 @@ station_file_data = config["station_file_data"]
 
 
 raster_file_data_item = {}
-raster_file_data_item["classification"] = "rainfall"
-raster_file_data_item["subclassification"] = "new"
-raster_file_data_item["period"] = "month"
-raster_file_data_item["units"] = "mm"
+
 raster_file_data_item["header_id"] = "hawaii_statewide_250m"
 raster_file_data_item["include_header"] = True
 raster_file_info = []
@@ -53,6 +50,11 @@ for dir_item in contents:
         fpath = "%s/%s/%s" % (dest_base_dir, dir_item, fname)
 
         raster_file_info_item = {}
+
+        raster_file_info_item["classification"] = "rainfall"
+        raster_file_info_item["subclassification"] = "new"
+        raster_file_info_item["period"] = "month"
+        raster_file_info_item["units"] = "mm"
         raster_file_info_item["raster_file"] = fpath
         raster_file_info_item["raster_date"] = date
         raster_file_info_item["ext_data"] = {}

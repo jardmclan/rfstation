@@ -86,6 +86,7 @@ def parse_date(date, period):
 
 #data, bash_file, meta_file, cleanup, retry, delay = 0
 def send_doc(doc):
+    print("Send doc")
     bash_file = config["bash_file"]
     outdir = config["outdir"]
     cleanup = config["cleanup"]
@@ -100,13 +101,12 @@ def send_doc(doc):
 
 
 def handle_station_metadata(file, data):
-    classification = data["classification"]
-    subclassification = data["subclassification"]
+
+    metadata_id = data["id"]
     metadata_cols = data["metadata_cols"]
     field_name_translations = data["field_name_translations"]
-    units = data["units"]
+    station_id_field = data["station_id_field"]
     ext = data["ext"]
-
     
     with open(file, "r") as fd:
         reader = csv.reader(fd)
@@ -115,25 +115,24 @@ def handle_station_metadata(file, data):
             if header is None:
                 header = row[metadata_cols[0], metadata_cols[1]]
             else:
-                value = {}
+                metadata = {}
                 for i in range(metadata_cols[0], metadata_cols[1]):
                     col = header[i]
                     col_trans = field_name_translations.get(col)
                     #if no column translation then this is probably just an erroneous column, ignore
                     if col_trans is not None:
                         item = row[i]
-                        value[col_trans] = item
+                        metadata[col_trans] = item
                 doc_name = get_doc_name("station_metadata")
                 #set subclass to null
                 meta_doc = {
                     "name": doc_name,
                     "version": version,
                     "value": {
-                        "classification": classification,
-                        "subclassification": subclassification,
-                        "units": units,
+                        "id": metadata_id,
+                        "station_id_field": station_id_field,
                         "ext": ext,
-                        "data": value
+                        "data": metadata
                     }
                 }
                 send_doc(meta_doc)
@@ -158,17 +157,19 @@ def get_active_range(data, nodata, dates):
     return active_range
 
 def handle_station_values(file, data):
+
+    metadata_id = data["metadata_id"]
     classification = data["classification"]
     subclassification = data["subclassification"]
     data_col_start = data["data_col_start"]
     fill = data["fill"]
     period = data["period"]
-    skn_col = data["skn_col"]
+    station_id_col = data["station_id_col"]
     ext = data["ext"]
     nodata = data["nodata"]
+    units = data["units"]
 
     #this is for the values document, not metadata file should be handled separately
-    #single initial column should be skn
     with open(file, "r") as fd:
         reader = csv.reader(fd)
         dates = None
@@ -179,15 +180,18 @@ def handle_station_values(file, data):
                 for i in range(len(dates)):
                     dates[i] = parse_date(dates[i], period)
             else:
-                skn = row[skn_col]
+                station_id = row[station_id_col]
                 values = row[data_col_start[0]]
                 active_range = get_active_range(values, nodata, dates)
                 doc_name = get_doc_name("active_range")
+                #add metadata id to this too to ensure everything tied together properly (maybe skn could be repeated between metadata sets)
+                #different metadata sets might have an id that isnt "skn", so switch to "station_id" and have a "station_id_field" item in the metadata that indicates which metadata field is the id
                 active_range_doc = {
                     "name": doc_name,
                     "version": version,
                     "value": {
-                        "skn": skn,
+                        "metadata_id": metadata_id,
+                        "station_id": station_id,
                         "active_range": {
                             "start": {
                                 "$date:": active_range[0]
@@ -212,7 +216,7 @@ def handle_station_values(file, data):
                             "value": {
                                 "classification": classification,
                                 "subclassification": subclassification,
-                                "skn": skn,
+                                "station_id": station_id,
                                 "period": period,
                                 "date": {
                                     "$date": dates[i]
@@ -354,27 +358,23 @@ def distribute():
     ###########################################################################
 
     for raster_file_data_item in raster_file_data:
-        header_complete = False
-        #for document format the main body should only have properties that are garenteed between data sets, everything else should be in the data portion
-        #not everything might have fill type
-        raster_classification = raster_file_data_item["classification"]
-        raster_subclassification = raster_file_data_item["subclassification"]
-        raster_period = raster_file_data_item["period"]
-        raster_units = raster_file_data_item["units"]
+        
         #include header id in case want extend to multiple headers later (change in resolution, spatial extent, etc), can use something like "hawaii_statewide_default" or something like that
         raster_header_id = raster_file_data_item["header_id"]
-        #note that items should not include header if already added
         include_header = raster_file_data_item["include_header"]
 
         raster_file_info = raster_file_data_item["raster_file_info"]
         for raster_file_info_item in raster_file_info:
+
+            raster_classification = raster_file_info_item["classification"]
+            raster_subclassification = raster_file_info_item["subclassification"]
+            raster_period = raster_file_info_item["period"]
+            raster_units = raster_file_info_item["units"]
             raster_file = raster_file_info_item["raster_file"]
             #this is the only thing that should change on a per file basis
             raster_date = raster_file_info_item["raster_date"]
             #any additional information unique to this set of rasters (non-standard fields), just set to null if there are none
-            raster_ext = raster_file_info_item["ext_data"]   
-
-            header_complete = True
+            raster_ext = raster_file_info_item["ext_data"]
 
             #distribute info with file, type, and field data
             info = {
@@ -388,12 +388,12 @@ def distribute():
                     "period": raster_period,
                     "date": raster_date,
                     "ext" : raster_ext,
-                    "include_header": include_header and not header_complete
+                    "include_header": include_header
                 },
                 "file": raster_file
             }
-            
-            print(raster_file)
+            #header already added if it should have been, switch to false
+            include_header = False
 
             send_info(info)
 
@@ -401,10 +401,8 @@ def distribute():
 
 
     for station_file_data_item in station_file_data:
-        station_classification = station_file_data_item["classification"]
-        station_subclassification = station_file_data_item["subclassification"]
         
-        station_units = station_file_data_item["units"]
+        metadata_id = station_file_data_item["metadata_id"]
 
         #process metadata as a separate file, can just recycle one of the files if multiple
         #this way if the group has variable sets of stations it handles they can be stripped out and put into a separate file to avoid issues (or can just feed it one of the files if theyre all the same)
@@ -412,11 +410,12 @@ def distribute():
         metadata_info = station_file_data_item["metadata_info"]
         #handle metadata item first
         #make metadata classification agnostic, there might be overlap between stations between classifications, all the metadata is pulled in beforehand so shouldn't matter (can change this if need, but should be fine, value docs have classification and subclass if available)
-        #might want to add something to check if station skn already exists? worry about this later
+        #might want to add something to check if station id already exists? worry about this later
         if metadata_info is not None:
             metadata_file = metadata_info["file"]
             metadata_cols = metadata_info["metadata_cols"]
             metadata_field_name_translation = metadata_info["field_name_translations"]
+            station_id_field = metadata_info["station_id_field"]
             #all info should be in the columns themselves, but allow extension data just in case
             metadata_ext = metadata_info["ext_data"]
 
@@ -431,23 +430,25 @@ def distribute():
             info = {
                 "type": "station_metadata",
                 "data": {
-                    "classification": station_classification,
-                    "subclassification": station_subclassification,
+                    "id": metadata_id,
                     "metadata_cols": metadata_cols,
                     "field_name_translations": metadata_field_name_translation,
-                    "units": station_units,
+                    "station_id_field": station_id_field,
                     "ext": metadata_ext
                 },
                 "file": metadata_file
             }
+            send_info(info)
 
         station_file_info = station_file_data_item["station_file_info"]
         for station_file_info_item in station_file_info:
 
-            station_skn_col = station_file_info_item["skn_col"]
-            data_col_start = station_file_info_item["data_col_start"]
-
+            station_classification = station_file_info_item["classification"]
+            station_subclassification = station_file_info_item["subclassification"]
             station_fill = station_file_info_item["fill"]
+            station_units = station_file_info_item["units"]
+            station_id_col = station_file_info_item["id_col"]
+            data_col_start = station_file_info_item["data_col_start"]
             station_period = station_file_info_item["period"]
             station_val_ext = station_file_info_item["ext_data"]
             station_file_nodata = station_file_info_item["nodata"]
@@ -455,17 +456,20 @@ def distribute():
             info = {
                 "type": "station_vals",
                 "data": {
+                    "metadata_id": metadata_id,
                     "classification": station_classification,
                     "subclassification": station_subclassification,
                     "data_col_start": data_col_start,
                     "fill": station_fill,
                     "period": station_period,
-                    "skn_col": station_skn_col,
+                    "station_id_col": station_id_col,
                     "nodata": station_file_nodata,
+                    "units": station_units,
                     "ext": station_val_ext
                 },
                 "file": metadata_file
             }
+            send_info(info)
 
     while ranks > 0:
         recv_rank = comm.recv()

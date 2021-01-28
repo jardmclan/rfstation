@@ -292,9 +292,9 @@ def handle_info():
                 #three types
                 if info["type"] == "raster":
                     handle_geotiff(file, data)
-                elif info.type == "station_vals":
+                elif info["type"] == "station_vals":
                     handle_station_values(file, data)
-                elif info.type == "station_metadata":
+                elif info["type"] == "station_metadata":
                     handle_station_metadata(file, data)
                 else:
                     raise RuntimeError("Unknown document type.")

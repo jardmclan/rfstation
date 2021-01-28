@@ -230,6 +230,7 @@ def handle_station_values(file, data):
 
 
 def handle_geotiff(file, data):
+    print(file)
     header_id = data["header_id"]
     classification = data["classification"]
     subclassification = data["subclassification"]
@@ -240,6 +241,8 @@ def handle_geotiff(file, data):
     include_header =  data["include_header"]
 
     geotiff_data = RasterData(file)
+
+    print(header_id)
 
     if include_header:
         doc_name = get_doc_name("raster_header")

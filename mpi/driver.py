@@ -325,10 +325,12 @@ def distribute():
     def send_info(info):
         nonlocal ranks
         recv_rank = -1
+        print(recv_rank == -1 and ranks > 0)
         #get next request for data (continue until receive request or all ranks error out and send -1)
         while recv_rank == -1 and ranks > 0:
             #receive data requests from ranks
             recv_rank = comm.recv()
+            print(recv_rank)
             #if recv -1 one of the ranks errored out, subtract from processor ranks (won't be requesting any more data)
             if recv_rank == -1:
                 ranks -= 1
@@ -353,11 +355,11 @@ def distribute():
         "active_range": "hcdp_station_active_range",
         "metadata": "hcdp_station_metadata"
     }
-    
 
     ###########################################################################
 
     for raster_file_data_item in raster_file_data:
+        print("item!")
         
         #include header id in case want extend to multiple headers later (change in resolution, spatial extent, etc), can use something like "hawaii_statewide_default" or something like that
         raster_header_id = raster_file_data_item["header_id"]
@@ -365,7 +367,7 @@ def distribute():
 
         raster_file_info = raster_file_data_item["raster_file_info"]
         for raster_file_info_item in raster_file_info:
-
+            print("file item!")
             raster_classification = raster_file_info_item["classification"]
             raster_subclassification = raster_file_info_item["subclassification"]
             raster_period = raster_file_info_item["period"]

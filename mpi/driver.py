@@ -1,9 +1,6 @@
 import csv
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
-from multiprocessing import Semaphore, Manager
 import re
 import json
-from copy import deepcopy
 from ingestion_handler import ingestion_handler
 from sys import stderr, argv
 from os.path import join

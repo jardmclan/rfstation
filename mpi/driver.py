@@ -96,9 +96,7 @@ def send_doc(doc):
     meta_file = "doc_%d_%d" % (doc_num, rank)
     doc_num += 1
     meta_file = join(outdir, meta_file)
-    try:
-        uuid = ingestion_handler(doc, bash_file, meta_file, cleanup, retry)
-    except Exception
+    uuid = ingestion_handler(doc, bash_file, meta_file, cleanup, retry)
     print("Complete UUID: %s" % uuid)
 
 

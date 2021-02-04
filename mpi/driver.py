@@ -1,9 +1,6 @@
 import csv
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
-from multiprocessing import Semaphore, Manager
 import re
 import json
-from copy import deepcopy
 from ingestion_handler import ingestion_handler
 from sys import stderr, argv
 from os.path import join
@@ -86,6 +83,7 @@ def parse_date(date, period):
 
 #data, bash_file, meta_file, cleanup, retry, delay = 0
 def send_doc(doc):
+    global doc_num
     print("Send doc")
     bash_file = config["bash_file"]
     outdir = config["outdir"]
@@ -95,7 +93,6 @@ def send_doc(doc):
     meta_file = "doc_%d_%d" % (doc_num, rank)
     doc_num += 1
     meta_file = join(outdir, meta_file)
-    
     uuid = ingestion_handler(doc, bash_file, meta_file, cleanup, retry)
     print("Complete UUID: %s" % uuid)
 
@@ -230,7 +227,6 @@ def handle_station_values(file, data):
 
 
 def handle_geotiff(file, data):
-    print(file)
     header_id = data["header_id"]
     classification = data["classification"]
     subclassification = data["subclassification"]
@@ -284,22 +280,20 @@ def handle_info():
         info = comm.sendrecv(rank, dest = distributor_rank)
         #process data and request more until terminator received from distributor
         while info is not None:
-            try:
-                print(info["file"])
-                print(info["type"])
-                file = info["file"]
-                data = info["data"]
-                #three types
-                if info["type"] == "raster":
-                    handle_geotiff(file, data)
-                elif info["type"] == "station_vals":
-                    handle_station_values(file, data)
-                elif info["type"] == "station_metadata":
-                    handle_station_metadata(file, data)
-                else:
-                    raise RuntimeError("Unknown document type.")
-            except Exception as e:
-                pass
+            # try:
+            file = info["file"]
+            data = info["data"]
+            #three types
+            if info["type"] == "raster":
+                handle_geotiff(file, data)
+            elif info["type"] == "station_vals":
+                handle_station_values(file, data)
+            elif info["type"] == "station_metadata":
+                handle_station_metadata(file, data)
+            else:
+                raise RuntimeError("Unknown document type.")
+            # except Exception as e:
+            #     #
                     
             info = comm.sendrecv(rank, dest = distributor_rank)
         print("Rank %d received terminator. Exiting data handler..." % rank)
@@ -330,12 +324,10 @@ def distribute():
     def send_info(info):
         nonlocal ranks
         recv_rank = -1
-        print(recv_rank == -1 and ranks > 0)
         #get next request for data (continue until receive request or all ranks error out and send -1)
         while recv_rank == -1 and ranks > 0:
             #receive data requests from ranks
             recv_rank = comm.recv()
-            print(recv_rank)
             #if recv -1 one of the ranks errored out, subtract from processor ranks (won't be requesting any more data)
             if recv_rank == -1:
                 ranks -= 1
@@ -364,7 +356,6 @@ def distribute():
     ###########################################################################
 
     for raster_file_data_item in raster_file_data:
-        print("item!")
         
         #include header id in case want extend to multiple headers later (change in resolution, spatial extent, etc), can use something like "hawaii_statewide_default" or something like that
         raster_header_id = raster_file_data_item["header_id"]
@@ -372,7 +363,6 @@ def distribute():
 
         raster_file_info = raster_file_data_item["raster_file_info"]
         for raster_file_info_item in raster_file_info:
-            print("file item!")
             raster_classification = raster_file_info_item["classification"]
             raster_subclassification = raster_file_info_item["subclassification"]
             raster_period = raster_file_info_item["period"]

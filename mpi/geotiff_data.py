@@ -58,15 +58,18 @@ class RasterData:
                     value = data[yi][xi]
                     if value != nodata:
                         index = self.__getIndexFromXY(xi, yi, nCols)
-                        data_map[index] = value
+                        #data is in np.float32 format which is not encodable to json for some reason, .item converts it to a python float
+                        data_map[index] = value.item()
 
 
             self.header = header
             self.data = data_map
 
 
-# r = RasterData("1990_01_statewide_rf_mm.tif")
-# print(r.data)
+r = RasterData("1990_01_statewide_rf_mm.tif")
+for item in r.data:
+    print(r.data[item])
+    break
 
         
     

@@ -26,7 +26,7 @@ def ingestion_handler(data, bash_file, meta_file, cleanup, retry, delay = 0):
     uuid = None
     out = None
     with open(meta_file, "w") as f:
-        json.dump(data, f)
+        json.dump(data, f, indent = 4)
     try:
         out = subprocess.check_output([bash_file, meta_file]).decode("utf-8")
     except subprocess.CalledProcessError:

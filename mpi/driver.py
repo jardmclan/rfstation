@@ -90,7 +90,7 @@ def send_doc(doc):
     cleanup = config["cleanup"]
     retry = config["retry"]
 
-    meta_file = "doc_%d_%d" % (doc_num, rank)
+    meta_file = "doc_%d_%d.json" % (doc_num, rank)
     doc_num += 1
     meta_file = join(outdir, meta_file)
     uuid = ingestion_handler(doc, bash_file, meta_file, cleanup, retry)
@@ -124,8 +124,8 @@ def handle_station_metadata(file, data):
                 #set subclass to null
                 meta_doc = {
                     "name": doc_name,
-                    "version": version,
                     "value": {
+                        "version": version,
                         "id": metadata_id,
                         "station_id_field": station_id_field,
                         "ext": ext,
@@ -185,8 +185,8 @@ def handle_station_values(file, data):
                 #different metadata sets might have an id that isnt "skn", so switch to "station_id" and have a "station_id_field" item in the metadata that indicates which metadata field is the id
                 active_range_doc = {
                     "name": doc_name,
-                    "version": version,
                     "value": {
+                        "version": version,
                         "metadata_id": metadata_id,
                         "station_id": station_id,
                         "active_range": {
@@ -209,8 +209,8 @@ def handle_station_values(file, data):
                     if value != nodata:
                         value_doc = {
                             "name": doc_name,
-                            "version": version,
                             "value": {
+                                "version": version,
                                 "classification": classification,
                                 "subclassification": subclassification,
                                 "station_id": station_id,
@@ -244,8 +244,8 @@ def handle_geotiff(file, data):
         doc_name = get_doc_name("raster_header")
         raster_header_doc = {
             "name": doc_name,
-            "version": version,
             "value": {
+                "version": version,
                 "id": header_id,
                 "data": geotiff_data.header
             }
@@ -255,8 +255,8 @@ def handle_geotiff(file, data):
     doc_name = get_doc_name("raster")
     raster_doc = {
         "name": doc_name,
-        "version": version,
         "value": {
+            "version": version,
             "header_id": header_id,
             "classification": classification,
             "subclassification": subclassification,

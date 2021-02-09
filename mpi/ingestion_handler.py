@@ -29,13 +29,16 @@ def ingestion_handler(data, bash_file, meta_file, cleanup, retry, delay = 0):
         json.dump(data, f, indent = 4)
     try:
         out = subprocess.check_output([bash_file, meta_file]).decode("utf-8")
-    except subprocess.CalledProcessError:
+
+    except subprocess.CalledProcessError as e:
+        print("subprocess failed %s" % e)
         uuid = retry_failure_with_backoff()
     #if success output should be "Successfully submitted metadata object <uuid>"
     match = re.match(r"Successfully submitted metadata object (.+)", out)
     if match is not None:
         uuid = match.group(1)
     else:
+        print("no match %s" % out)
         uuid = retry_failure_with_backoff()
     if cleanup:
         try:

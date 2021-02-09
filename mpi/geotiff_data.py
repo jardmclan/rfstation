@@ -66,10 +66,11 @@ class RasterData:
             self.data = data_map
 
 
-r = RasterData("1990_01_statewide_rf_mm.tif")
-for item in r.data:
-    print(r.data[item])
-    break
+# r = RasterData("1990_01_statewide_rf_mm.tif")
+# print(len(r.data))
+# for item in r.data:
+#     print(r.data[item])
+#     break
 
         
     

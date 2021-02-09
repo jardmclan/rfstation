@@ -84,7 +84,6 @@ def parse_date(date, period):
 #data, bash_file, meta_file, cleanup, retry, delay = 0
 def send_doc(doc):
     global doc_num
-    print("Send doc")
     bash_file = config["bash_file"]
     outdir = config["outdir"]
     cleanup = config["cleanup"]
@@ -237,8 +236,6 @@ def handle_geotiff(file, data):
     include_header =  data["include_header"]
 
     geotiff_data = RasterData(file)
-
-    print(header_id)
 
     if include_header:
         doc_name = get_doc_name("raster_header")

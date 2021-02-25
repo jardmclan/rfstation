@@ -218,7 +218,7 @@ def handle_station_values(file, data):
                                     "subclassification": subclassification,
                                     "station_id": station_id,
                                     "period": period,
-                                }
+                                },
                                 "date": {
                                     "$date": dates[i]
                                 },
@@ -266,7 +266,7 @@ def handle_geotiff(file, data):
                 "subclassification": subclassification,
                 "units": units,
                 "period": period
-            }
+            },
             "date": {
                 "$date": date
             },

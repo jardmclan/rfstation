@@ -5,10 +5,13 @@ import random
 import subprocess
 import re
 
+class IngestionRetryExceeded(Exception):
+    pass
+
 def ingestion_handler(data, bash_file, meta_file, cleanup, retry, delay = 0):
 
     if retry < 0:
-        raise Exception("Retry limit exceeded")
+        raise IngestionFailedError("Retry limit exceeded")
 
     def retry_failure_with_backoff():
         backoff = 0

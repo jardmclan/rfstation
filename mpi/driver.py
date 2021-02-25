@@ -84,13 +84,12 @@ def parse_date(date, period):
 #data, bash_file, meta_file, cleanup, retry, delay = 0
 def send_doc(doc):
     global doc_num
-    print("Send doc")
     bash_file = config["bash_file"]
     outdir = config["outdir"]
     cleanup = config["cleanup"]
     retry = config["retry"]
 
-    meta_file = "doc_%d_%d" % (doc_num, rank)
+    meta_file = "doc_%d_%d.json" % (doc_num, rank)
     doc_num += 1
     meta_file = join(outdir, meta_file)
     uuid = ingestion_handler(doc, bash_file, meta_file, cleanup, retry)
@@ -188,8 +187,8 @@ def handle_station_values(file, data):
                 #different metadata sets might have an id that isnt "skn", so switch to "station_id" and have a "station_id_field" item in the metadata that indicates which metadata field is the id
                 active_range_doc = {
                     "name": doc_name,
-                    "version": version,
                     "value": {
+                        "version": version,
                         "metadata_id": metadata_id,
                         "station_id": station_id,
                         "active_range": {

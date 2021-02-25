@@ -5,7 +5,7 @@
 
 
 BootStrap: docker
-From: mcleanj/rfing:latest
+From: mcleanj/centmpi:latest
 #Include: rpm2cpio
 
 
@@ -35,10 +35,7 @@ From: mcleanj/rfing:latest
         libfreetype6-dev \
         libpng-dev \
         libzmq3-dev \
-        python-pip \
         pkg-config \
-        python-dev \
-        python-setuptools \
         rsync \
         software-properties-common \
         unzip \

@@ -1,0 +1,18 @@
+# Defines a Singularity container with IB stack 
+# Includes Lmod for using CHPC installed compilers and MPI distros
+# (MPICH derived MPI distros work)
+
+
+
+BootStrap: docker
+From: mcleanj/ubuntuconda:latest
+
+%runscript
+
+%setup
+
+%post
+    
+%environment    
+
+%test

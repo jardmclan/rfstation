@@ -97,42 +97,45 @@ def send_doc(doc):
     print("Complete UUID: %s" % uuid)
 
 
-def handle_station_metadata(file, data):
+# def handle_station_metadata(file, data):
 
-    metadata_id = data["id"]
-    metadata_cols = data["metadata_cols"]
-    field_name_translations = data["field_name_translations"]
-    station_id_field = data["station_id_field"]
-    ext = data["ext"]
+#     metadata_id = data["id"]
+#     metadata_cols = data["metadata_cols"]
+#     field_name_translations = data["field_name_translations"]
+#     station_id_field = data["station_id_field"]
+#     ext = data["ext"]
     
-    with open(file, "r") as fd:
-        reader = csv.reader(fd)
-        header = None
-        for row in reader:
-            if header is None:
-                header = row[metadata_cols[0], metadata_cols[1]]
-            else:
-                metadata = {}
-                for i in range(metadata_cols[0], metadata_cols[1]):
-                    col = header[i]
-                    col_trans = field_name_translations.get(col)
-                    #if no column translation then this is probably just an erroneous column, ignore
-                    if col_trans is not None:
-                        item = row[i]
-                        metadata[col_trans] = item
-                doc_name = get_doc_name("station_metadata")
-                #set subclass to null
-                meta_doc = {
-                    "name": doc_name,
-                    "version": version,
-                    "value": {
-                        "id": metadata_id,
-                        "station_id_field": station_id_field,
-                        "ext": ext,
-                        "data": metadata
-                    }
-                }
-                send_doc(meta_doc)
+#     with open(file, "r") as fd:
+#         reader = csv.reader(fd)
+#         header = None
+#         for row in reader:
+#             if header is None:
+#                 header = row[metadata_cols[0], metadata_cols[1]]
+#             else:
+#                 metadata = {}
+#                 for i in range(metadata_cols[0], metadata_cols[1]):
+#                     col = header[i]
+#                     col_trans = field_name_translations.get(col)
+#                     #if no column translation then this is probably just an erroneous column, ignore
+#                     if col_trans is not None:
+#                         item = row[i]
+#                         metadata[col_trans] = item
+#                 doc_name = get_doc_name("station_metadata")
+#                 #set subclass to null
+#                 meta_doc = {
+#                     "name": doc_name,
+#                     "value": {
+#                         "version": version,
+#                         "key": {
+
+#                         }
+#                         "id": metadata_id,
+#                         "station_id_field": station_id_field,
+#                         "ext": ext,
+#                         "data": metadata
+#                     }
+#                 }
+#                 send_doc(meta_doc)
 
 
 
@@ -209,16 +212,17 @@ def handle_station_values(file, data):
                     if value != nodata:
                         value_doc = {
                             "name": doc_name,
-                            "version": version,
                             "value": {
-                                "classification": classification,
-                                "subclassification": subclassification,
-                                "station_id": station_id,
-                                "period": period,
+                                "version": version,
+                                "key": {
+                                    "classification": classification,
+                                    "subclassification": subclassification,
+                                    "station_id": station_id,
+                                    "period": period,
+                                }
                                 "date": {
                                     "$date": dates[i]
                                 },
-                                "ext": ext,
                                 "value": value
                             }
                         }
@@ -240,32 +244,33 @@ def handle_geotiff(file, data):
 
     print(header_id)
 
-    if include_header:
-        doc_name = get_doc_name("raster_header")
-        raster_header_doc = {
-            "name": doc_name,
-            "version": version,
-            "value": {
-                "id": header_id,
-                "data": geotiff_data.header
-            }
-        }
-        send_doc(raster_header_doc)
+    # if include_header:
+    #     doc_name = get_doc_name("raster_header")
+    #     raster_header_doc = {
+    #         "name": doc_name,
+    #         "value": {
+    #             "version": version,
+    #             "id": header_id,
+    #             "data": geotiff_data.header
+    #         }
+    #     }
+    #     send_doc(raster_header_doc)
 
     doc_name = get_doc_name("raster")
     raster_doc = {
         "name": doc_name,
-        "version": version,
         "value": {
-            "header_id": header_id,
-            "classification": classification,
-            "subclassification": subclassification,
-            "units": units,
-            "period": period,
+            "version": version,
+            "key": {
+                "header_id": header_id,
+                "classification": classification,
+                "subclassification": subclassification,
+                "units": units,
+                "period": period
+            }
             "date": {
                 "$date": date
             },
-            "ext" : ext,
             "data": geotiff_data.data
         }
     }

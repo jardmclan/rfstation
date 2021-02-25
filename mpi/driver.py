@@ -235,7 +235,7 @@ def handle_geotiff(file, data):
     subclassification = data["subclassification"]
     units = data["units"]
     period = data["period"]
-    date = data["date"] + "-01"
+    date = data["date"]
     ext = data["ext"]
     include_header =  data["include_header"]
 
@@ -267,9 +267,7 @@ def handle_geotiff(file, data):
                 "units": units,
                 "period": period
             },
-            "date": {
-                "$date": date
-            },
+            "date": date,
             "data": geotiff_data.data
         }
     }

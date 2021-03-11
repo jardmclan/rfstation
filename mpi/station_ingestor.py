@@ -4,7 +4,6 @@ import json
 from ingestion_handler import ingestion_handler
 from sys import stderr, argv
 from os.path import join
-from geotiff_data import RasterData
 from ingestion_handler import ingestion_handler
 
 
@@ -123,7 +122,7 @@ def handle_station_values(info):
 
     doc_name = get_doc_name("station_value")
 
-    for i in range(len(values)):
+    for i in range(len(data)):
         value = data[i]
         if value != nodata:
             value_doc = {
@@ -135,7 +134,7 @@ def handle_station_values(info):
                     },
                     "descriptor": {
                         "station_id": station_id
-                    }
+                    },
                     "date": dates[i],
                     "data": value
                 }
@@ -209,7 +208,7 @@ def distribute():
         descriptor = station_file_data_item["descriptor"]
 
         #have each rank handle one row at a time
-        with open(file, "r") as fd:
+        with open(data_file, "r") as fd:
             reader = csv.reader(fd)
             dates = None
             for row in reader:

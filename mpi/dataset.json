@@ -1,0 +1,20 @@
+{
+    "dataset_header": {
+        "id": 0,
+        "datatype": "rainfall",
+        "production_method": "new",
+        "data_tier": 0,
+        "unit": "mm",
+        "georef": "hawaii_statewide_250m"
+    },
+    "key": {
+        "datatype": "rainfall",
+        "unit": "mm",
+        "fill": "partial",
+        "data_tier": 0,
+        "metadata_ref": "hawaii_sensor_station_network"
+    },
+    "file": "",
+    "id_col": 0,
+    "data_start": 1
+}

@@ -47,7 +47,7 @@ doc_num = 0
 doc_names = {
     "raster_header": "hcdp_raster_header",
     "raster": "hcdp_raster",
-    "value": "hcdp_station_value",
+    "station_value": "hcdp_station_value",
     "active_range": "hcdp_station_active_range",
     "metadata": "hcdp_station_metadata"
 }

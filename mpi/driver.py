@@ -267,9 +267,7 @@ def handle_geotiff(file, data):
                 "units": units,
                 "period": period
             },
-            "date": {
-                "$date": date
-            },
+            "date": date,
             "data": geotiff_data.data
         }
     }

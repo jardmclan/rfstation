@@ -35,14 +35,6 @@ with open(config_file) as f:
 #unique version number for the data set, should change with each run
 version = config["version"]
 
-##########################################
-
-#process rank
-rank = comm.Get_rank()
-processor_name = MPI.Get_processor_name()
-doc_num = 0
-
-
 #document names should not change, broad identifier of document type
 #5 potential douments
 doc_names = {
@@ -55,6 +47,13 @@ doc_names = {
 
 ##########################################
 
+#process rank
+rank = comm.Get_rank()
+processor_name = MPI.Get_processor_name()
+doc_num = 0
+
+##########################################
+
 
 #remember $date IS necessary
 
@@ -62,33 +61,6 @@ doc_names = {
 def get_doc_name(doc_type):
     doc_name = doc_names[doc_type]
     return doc_name
-
-# XYYYY.MM.DD
-def parse_date(date, period):
-    parsed_date = None
-    pattern = None
-    if period == "day":
-        pattern = "^X([0-9]{4})\.([0-9]{2})\.([0-9]{2})$"
-    elif period == "month":
-        pattern = "^X([0-9]{4})\.([0-9]{2})$"
-    else:
-        raise ValueError("Unknown period.")
-    match = re.match(pattern, date)
-    if match is None:
-        raise ValueError("Invalid date.")
-    if period == "day":
-        year = match.group(1)
-        month = match.group(2)
-        day = match.group(3)
-        #note don't need time
-        parsed_date = "%s-%s-%s" % (year, month, day)
-    elif period == "month":
-        year = match.group(1)
-        month = match.group(2)
-        #note don't need time
-        parsed_date = "%s-%s" % (year, month)
-    
-    return parsed_date
 
 
 
@@ -109,46 +81,49 @@ def send_doc(doc):
 
 
 
-def handle_station_values(info):
 
-    dates = info["dates"]
-    data = info["data"]
-    doc_key_base = info["doc_key_base"]
-    period = info["period"]
-    station_id = info["station_id"]
-    nodata = info["nodata"] 
-    descriptor = info["descriptor"]
-                
-    #note active range should be retreivable using min and max queries on date field
+def handle_geotiff(info):
 
-    doc_name = get_doc_name("station_value")
+    units = data["units"]
+    period = data["period"]
+    date = data["date"]
+    ext = data["ext"]
 
-    for i in range(len(values)):
-        value = data[i]
-        if value != nodata:
-            value_doc = {
-                "name": doc_name,
-                "value": {
-                    "version": version,
-                    "key": {
-                        "period": period
-                    },
-                    "descriptor": {
-                        "station_id": station_id
-                    },
-                    "date": dates[i],
-                    "data": value
-                }
+    geotiff_data = RasterData(file)
+
+
+
+    doc_name = get_doc_name("raster")
+    raster_doc = {
+        "name": doc_name,
+        "value": {
+            "version": version,
+            "key": {
+
+            },
+            "date": date,
+            "data": geotiff_data.data
+        }
+    }
+
+    {
+        "name": doc_name,
+        "value": {
+            "version": version,
+            "key": {
+            },
+            "descriptor": {
             }
-            for key in doc_key_base:
-                value_doc["value"]["key"][key] = doc_key_base[key]
-            for key in descriptor:
-                value_doc["value"]["descriptor"][key] = descriptor[key]
-            send_doc(value_doc)
+            "date": date,
+            "data": geotiff_data.data
+        }
+    }
+    for key in doc_key_base:
+        raster_doc["value"]["key"][key] = doc_key_base[key]
+    for key in descriptor:
+        raster_doc["value"]["descriptor"][key] = descriptor[key]
+    send_doc(raster_doc)
 
-
-
-#SKN, METADATA DOC PART OF DATA
 
 
 def handle_info():
@@ -158,8 +133,20 @@ def handle_info():
         info = comm.sendrecv(rank, dest = distributor_rank)
         #process data and request more until terminator received from distributor
         while info is not None:
-
-            handle_station_values(info)
+            # try:
+            file = info["file"]
+            data = info["data"]
+            #three types
+            if info["type"] == "raster":
+                handle_geotiff(file, data)
+            elif info["type"] == "station_vals":
+                handle_station_values(file, data)
+            elif info["type"] == "station_metadata":
+                handle_station_metadata(file, data)
+            else:
+                raise RuntimeError("Unknown document type.")
+            # except Exception as e:
+            #     #
                     
             info = comm.sendrecv(rank, dest = distributor_rank)
         print("Rank %d received terminator. Exiting data handler..." % rank)
@@ -195,43 +182,36 @@ def distribute():
     ###################################################
 
     
-    station_file_data = config["station_file_data"]
+
+    raster_file_data = config["raster_file_data"]
 
     
-    for station_file_data_item in station_file_data:
 
-        doc_key_base = station_file_data_item["key"]
-        data_file = station_file_data_item["file"]
-        id_col = station_file_data_item["id_col"]
-        data_col_start = station_file_data_item["data_col_start"]
-        nodata = station_file_data_item["nodata"]
-        period = station_file_data_item["period"]
-        descriptor = station_file_data_item["descriptor"]
+    ###########################################################################
 
-        #have each rank handle one row at a time
-        with open(file, "r") as fd:
-            reader = csv.reader(fd)
-            dates = None
-            for row in reader:
-                if dates is None:
-                    dates = row[data_col_start:]
-                    #transform dates
-                    for i in range(len(dates)):
-                        dates[i] = parse_date(dates[i], period)
-                else:
-                    station_id = row[id_col]
-                    values = row[data_col_start:]
+    for raster_file_data_item in raster_file_data:
 
-                    info = {
-                        "dates": dates,
-                        "data": values,
-                        "doc_key_base": doc_key_base,
-                        "descriptor": descriptor,
-                        "period": period,
-                        "station_id": station_id,
-                        "nodata": nodata
-                    }
-                    send_info(info)
+
+        raster_file_info = raster_file_data_item["raster_file_info"]
+ 
+            raster_file_date = 
+
+            #distribute info with file, type, and field data
+            info = {
+                "type": "raster",
+                "version": version,
+                "date": date
+                "file": raster_file
+            }
+            #header already added if it should have been, switch to false
+            include_header = False
+
+            send_info(info)
+
+    ###################################################
+
+
+   
 
     while ranks > 0:
         recv_rank = comm.recv()

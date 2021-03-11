@@ -13,7 +13,7 @@
         "descriptor": {
             "metadata_doc": "hawaii_sensor_network"
         },
-        "period": "monthly",
+        "period": "month",
         "file": "/home/mcleanj/rfing/data/monthly_rf_all_data_1920_2020_FINAL_16apr2020.csv",
         "id_col": 0,
         "data_col_start": 13,
@@ -28,7 +28,7 @@
         "descriptor": {
             "metadata_doc": "hawaii_sensor_network"
         },
-        "period": "daily",
+        "period": "day",
         "file": "/home/mcleanj/rfing/data/Partial_Filled_Daily_RF_mm_2020_12_31_RF.csv",
         "id_col": 1,
         "data_col_start": 14,
@@ -43,7 +43,7 @@
         "descriptor": {
             "metadata_doc": "hawaii_sensor_network"
         },
-        "period": "daily",
+        "period": "day",
         "file": "/home/mcleanj/rfing/data/Unfilled_Daily_RF_mm_2020_12_31_RF.csv",
         "id_col": 1,
         "data_col_start": 14,

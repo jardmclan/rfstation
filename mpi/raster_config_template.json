@@ -1,0 +1,21 @@
+{
+    "version": "2.0",
+    "bash_file": "/home/mcleanj/rfing/bin/add_meta.sh",
+    "outdir": "/home/mcleanj/rfing/outf",
+    "cleanup": true,
+    "retry": 5,
+    "raster_file_data": [{
+        "key": {
+            "datatype": "rainfall",
+            "production": "new",
+            "period": "month",
+            "tier": 0
+        },
+        "descriptor": {
+            "georef_doc": "hawaii_statewide",
+            "metadata_doc": null,
+            "unit": "mm"
+        },
+        "file_info": []
+    }]
+}

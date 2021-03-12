@@ -40,7 +40,7 @@ class RasterData:
             xllCorner = x - xllOffset
             yllCorner = y - yllOffset
 
-        #note nodata value not needed for application since strippping the values out 
+        #note nodata value not needed for application since stripping the values out 
             header = {
                 "nCols": nCols,
                 "nRows": nRows,

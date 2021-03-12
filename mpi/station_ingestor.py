@@ -67,9 +67,9 @@ def parse_date(date, period):
     parsed_date = None
     pattern = None
     if period == "day":
-        pattern = "^X([0-9]{4})\.([0-9]{2})\.([0-9]{2})$"
+        pattern = r"^X([0-9]{4})\.([0-9]{2})\.([0-9]{2})$"
     elif period == "month":
-        pattern = "^X([0-9]{4})\.([0-9]{2})$"
+        pattern = r"^X([0-9]{4})\.([0-9]{2})$"
     else:
         raise ValueError("Unknown period.")
     match = re.match(pattern, date)

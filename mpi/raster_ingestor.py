@@ -84,13 +84,12 @@ def send_doc(doc):
 
 def handle_geotiff(info):
 
-    units = data["units"]
-    period = data["period"]
-    date = data["date"]
-    ext = data["ext"]
+    doc_key_base = info["key"]
+    descriptor = info["descriptor"]
+    date = info["date"]
+    raster_file = info["file"]
 
-    geotiff_data = RasterData(file)
-
+    geotiff_data = RasterData(raster_file)
 
 
     doc_name = get_doc_name("raster")
@@ -99,21 +98,9 @@ def handle_geotiff(info):
         "value": {
             "version": version,
             "key": {
-
-            },
-            "date": date,
-            "data": geotiff_data.data
-        }
-    }
-
-    {
-        "name": doc_name,
-        "value": {
-            "version": version,
-            "key": {
             },
             "descriptor": {
-            }
+            },
             "date": date,
             "data": geotiff_data.data
         }
@@ -133,21 +120,7 @@ def handle_info():
         info = comm.sendrecv(rank, dest = distributor_rank)
         #process data and request more until terminator received from distributor
         while info is not None:
-            # try:
-            file = info["file"]
-            data = info["data"]
-            #three types
-            if info["type"] == "raster":
-                handle_geotiff(file, data)
-            elif info["type"] == "station_vals":
-                handle_station_values(file, data)
-            elif info["type"] == "station_metadata":
-                handle_station_metadata(file, data)
-            else:
-                raise RuntimeError("Unknown document type.")
-            # except Exception as e:
-            #     #
-                    
+            handle_geotiff(info)
             info = comm.sendrecv(rank, dest = distributor_rank)
         print("Rank %d received terminator. Exiting data handler..." % rank)
     except Exception as e:
@@ -183,28 +156,29 @@ def distribute():
 
     
 
-    raster_file_data = config["raster_file_data"]
+    raster_data = config["raster_data"]
 
     
 
     ###########################################################################
 
-    for raster_file_data_item in raster_file_data:
-
-
-        raster_file_info = raster_file_data_item["raster_file_info"]
+    for raster_data_item in raster_data:
  
-            raster_file_date = 
+        key = raster_data_item["key"]
+        descriptor = raster_data_item["descriptor"]
+        raster_file_info = raster_data_item["file_info"]
+
+        for raster_file_info_item in raster_file_info:
+            date = raster_file_info_item["date"]
+            raster_file = raster_file_info_item["file"]
 
             #distribute info with file, type, and field data
             info = {
-                "type": "raster",
-                "version": version,
-                "date": date
+                "key": key,
+                "descriptor": descriptor,
+                "date": date,
                 "file": raster_file
             }
-            #header already added if it should have been, switch to false
-            include_header = False
 
             send_info(info)
 
